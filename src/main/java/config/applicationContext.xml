@@ -18,36 +18,61 @@
 	<context:property-placeholder location="classpath:/config/jdbc.properties" />
 
 	<!-- 自动扫描dao和service包(自动注入) -->
-	<context:component-scan base-package="cn.myth.MoodBlog" use-default-filters="false">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	<context:component-scan base-package="cn.myth.MoodBlog"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+			<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+			
 	</context:component-scan>
-	
-
-	<!-- 数据源 <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
-		<property name="driverClass" value="${jdbc.driverClassName}" /> <property 
-		name="jdbcUrl" value="${jdbc.url}" /> <property name="user" value="${jdbc.user}" 
-		/> <property name="password" value="${jdbc.pass}" /> <property name="minPoolSize" 
-		value="2" /> <property name="maxPoolSize" value="50" /> <property name="initialPoolSize" 
-		value="10" /> <property name="maxIdleTime" value="60" /> <property name="acquireIncrement" 
-		value="2" /> </bean> -->
 
 
-	<!-- 配置sessionFactory，统一管理一个数据库的连接 <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"> 
-		<property name="dataSource" ref="dataSource" /> <property name="packagesToScan"> 
-		<list> -->
-	<!-- 可以加多个包，需要hibenate映射的类的包 <value>cn.myth.MoodBlog.entity</value> </list> 
-		</property> -->
+	<!-- 数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClassName}" />
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<property name="user" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.pass}" />
+		<property name="minPoolSize" value="2" />
+		<property name="maxPoolSize" value="50" />
+		<property name="initialPoolSize" value="10" />
+		<property name="maxIdleTime" value="60" />
+		<property name="acquireIncrement" value="2" />
+	</bean>
 
 
-	<!-- <property name="hibernateProperties"> <props> <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop> 
-		<prop key="hibernate.dialect">${hibernate.dialect}</prop> <prop key="hibernate.show_sql">${hibernate.show_sql}</prop> -->
-	<!-- <prop key="hibernate.current_session_context_class">thread</prop> </props> 
-		</property> </bean> -->
+	<!-- 配置sessionFactory，统一管理一个数据库的连接 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<!-- 可以加多个包，需要hibenate映射的类的包 -->
+				<value>cn.myth.MoodBlog.entity</value>
+			</list>
+		</property>
 
-	<!-- 开启注解事务 只对当前配置文件有效 <tx:annotation-driven transaction-manager="transactionManager" 
-		proxy-target-class="true" /> -->
-	<!-- 配置Hibernate事务管理器 <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager"> 
-		<property name="sessionFactory" ref="sessionFactory" /> </bean> -->
-	<!-- 配置事务异常封装 <bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" 
-		/> -->
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
+			</props>
+		</property>
+	</bean>
+
+	<!-- 开启注解事务 只对当前配置文件有效 -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+	<!-- 配置Hibernate事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 配置事务异常封装 -->
+	<bean id="persistenceExceptionTranslationPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 </beans> 

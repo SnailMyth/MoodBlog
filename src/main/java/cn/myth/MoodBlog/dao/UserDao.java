@@ -23,7 +23,7 @@ public class UserDao {
 	 * @return
 	 */
 	public User getUserById(String id) {
-		return (User) this.getSession().createQuery("from User where u_id=?").setParameter(0, id).uniqueResult();
+		return (User) this.getSession().createQuery("from User where u_id= ?").setParameter(0, id).uniqueResult();
 	}
 
 	/**

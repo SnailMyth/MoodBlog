@@ -22,10 +22,11 @@
 		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Service" />
-			<context:include-filter type="annotation"
+		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
-			
+
 	</context:component-scan>
+
 
 
 	<!-- 数据源 -->
@@ -34,11 +35,18 @@
 		<property name="jdbcUrl" value="${jdbc.url}" />
 		<property name="user" value="${jdbc.user}" />
 		<property name="password" value="${jdbc.pass}" />
-		<property name="minPoolSize" value="2" />
-		<property name="maxPoolSize" value="50" />
-		<property name="initialPoolSize" value="10" />
-		<property name="maxIdleTime" value="60" />
-		<property name="acquireIncrement" value="2" />
+		<!-- 请求超时时间 -->
+		<property name="checkoutTimeout" value="30000" />
+		<!-- 每60秒检查所有连接池中的空闲连接。默认值: 0，不检查 -->
+		<property name="idleConnectionTestPeriod" value="30" />
+		<!-- 连接数据库连接池最大空闲时间 -->
+		<property name="maxIdleTime" value="30" />
+		<!-- 连接池初始化连接数 -->
+		<property name="initialPoolSize" value="5" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="20" />
+		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。默认值: 3 -->
+		<property name="acquireIncrement" value="5" />
 	</bean>
 
 
@@ -52,8 +60,6 @@
 				<value>cn.myth.MoodBlog.entity</value>
 			</list>
 		</property>
-
-
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
@@ -67,12 +73,11 @@
 	<!-- 开启注解事务 只对当前配置文件有效 -->
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />
+	
 	<!-- 配置Hibernate事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	<!-- 配置事务异常封装 -->
-	<bean id="persistenceExceptionTranslationPostProcessor"
-		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	
 </beans> 

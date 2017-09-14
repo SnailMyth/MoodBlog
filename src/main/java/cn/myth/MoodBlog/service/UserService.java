@@ -15,11 +15,12 @@ public class UserService {
 	public UserDao dao;
 
 	public User getUser(String id) {
-		return dao.getUserById(id);
+		User user = dao.getUserById(id);
+		return user;
 	}
 
 	public void addUser(User user) {
-		dao.addUser(user);
+			dao.addUser(user);
 	}
 
 }

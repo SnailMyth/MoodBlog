@@ -36,8 +36,13 @@ public class Login {
 		User user = new User();
 		user.setUsername("myth_hai");
 		user.setPasswd("1111");
-		service.addUser(user);
-		User user1 = service.getUser("1");
+		
+		try {
+			service.addUser(user);
+		} catch (Exception e) {
+			System.out.println("aaaaa");
+		}
+		User user1 = service.getUser("8");
 		ResultData<User> data = new ResultData<User>();
 		data.setData(user1);
 		return data;

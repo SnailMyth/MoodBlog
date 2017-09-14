@@ -10,7 +10,9 @@ package cn.myth.MoodBlog.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import cn.myth.MoodBlog.base.BaseException;
 import cn.myth.MoodBlog.base.MythError;
@@ -23,28 +25,51 @@ public class Login {
 
 	@Autowired
 	public UserService service;
-	
+
 	@RequestMapping("/")
-	public @ResponseBody String index() {
-		return "index";
+	public @ResponseBody ModelAndView index() {
+		ModelAndView mode = new ModelAndView();
+		mode.setViewName("index");
+		return mode;
+	}
+
+	@RequestMapping("/add")
+	@ResponseBody
+	public ResultData<Boolean> add(@RequestParam("username") String username, @RequestParam("password") String password) {
+
+		User user = new User();
+		user.setUsername(username);
+		user.setPasswd(password);
+		ResultData<Boolean> data = new ResultData<Boolean>();
+		try {
+			service.addUser(user);
+		} catch (Exception e) {
+			System.out.println("add false");
+			data.setData(false);
+		}
+		
+		data.setData(true);
+		return data;
+	}
+
+	@RequestMapping("/get")
+	@ResponseBody
+	public ResultData<User> get(@RequestParam("username") String username) {
+		User user = service.getUserByName(username);
+		ResultData<User> data = new ResultData<User>();
+		data.setData(user);
+		return data;
 	}
 
 	@RequestMapping("/login")
 	@ResponseBody
-	public ResultData<User> login() {
-
+	public ResultData<Boolean> login(@RequestParam("username") String username,
+			@RequestParam("password") String password) {
 		User user = new User();
-		user.setUsername("myth_hai");
-		user.setPasswd("1111");
-		
-		try {
-			service.addUser(user);
-		} catch (Exception e) {
-			System.out.println("aaaaa");
-		}
-		User user1 = service.getUser("8");
-		ResultData<User> data = new ResultData<User>();
-		data.setData(user1);
+		user.setPasswd(password);
+		user.setUsername(username);
+		ResultData<Boolean> data = new ResultData<Boolean>();
+		data.setData(service.login(user));
 		return data;
 	}
 
@@ -53,7 +78,6 @@ public class Login {
 	public ResultData<BaseException> error() {
 		BaseException exception = new BaseException();
 		exception.setError(MythError.ID_EXSIT);
-
 		ResultData<BaseException> data = new ResultData<BaseException>();
 		data.setData(exception);
 		return data;

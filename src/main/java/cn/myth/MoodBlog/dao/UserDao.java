@@ -25,6 +25,16 @@ public class UserDao {
 	public User getUserById(String id) {
 		return (User) this.getSession().createQuery("from User where u_id= ?").setParameter(0, id).uniqueResult();
 	}
+	
+	/**
+	 * 根据id查询
+	 * @param id
+	 * @return
+	 */
+	public User getUserByName(String username) {
+		return (User) this.getSession().createQuery("from User where username= ?").setParameter(0, username).uniqueResult();
+	}
+	
 
 	/**
 	 * 添加

@@ -18,9 +18,27 @@ public class UserService {
 		User user = dao.getUserById(id);
 		return user;
 	}
+	
+	public User getUserByName(String username) {
+		User user = dao.getUserByName(username);
+		return user;
+	}
 
 	public void addUser(User user) {
 			dao.addUser(user);
+	}
+	
+	
+	public boolean login(User user){
+		boolean result = false;
+		User res = dao.getUserByName(user.getUsername());
+		if (res != null) {
+			if (user.getPasswd().equals(res.getPasswd())) {
+				result = true;
+			}
+		}
+		
+		return result;
 	}
 
 }

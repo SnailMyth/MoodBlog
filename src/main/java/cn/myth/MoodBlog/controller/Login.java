@@ -27,39 +27,30 @@ public class Login {
 	public UserService service;
 
 	@RequestMapping("/")
-	public @ResponseBody ModelAndView index() {
-		ModelAndView mode = new ModelAndView();
-		mode.setViewName("index");
-		return mode;
+	public String index() {
+		return "index";
+	}
+
+	@RequestMapping("/register")
+	public String register() {
+		return "register";
 	}
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public ResultData<Boolean> add(@RequestParam("username") String username, @RequestParam("password") String password) {
+	public ResultData<Boolean> add(@RequestParam("username") String username,
+			@RequestParam("password") String password) {
 
 		User user = new User();
 		user.setUsername(username);
 		user.setPasswd(password);
 		ResultData<Boolean> data = new ResultData<Boolean>();
-		try {
-			service.addUser(user);
-		} catch (Exception e) {
-			System.out.println("add false");
-			data.setData(false);
-		}
-		
+		service.addUser(user);
+		data.setData(false);
 		data.setData(true);
 		return data;
 	}
 
-	@RequestMapping("/get")
-	@ResponseBody
-	public ResultData<User> get(@RequestParam("username") String username) {
-		User user = service.getUserByName(username);
-		ResultData<User> data = new ResultData<User>();
-		data.setData(user);
-		return data;
-	}
 
 	@RequestMapping("/login")
 	@ResponseBody
@@ -70,16 +61,6 @@ public class Login {
 		user.setUsername(username);
 		ResultData<Boolean> data = new ResultData<Boolean>();
 		data.setData(service.login(user));
-		return data;
-	}
-
-	@RequestMapping("/error")
-	@ResponseBody
-	public ResultData<BaseException> error() {
-		BaseException exception = new BaseException();
-		exception.setError(MythError.ID_EXSIT);
-		ResultData<BaseException> data = new ResultData<BaseException>();
-		data.setData(exception);
 		return data;
 	}
 }

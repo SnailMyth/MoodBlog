@@ -70,37 +70,40 @@
 		</property>
 	</bean>
 
-	<!-- 开启注解事务 只对当前配置文件有效 
-	<tx:annotation-driven transaction-manager="transactionManager"
-		proxy-target-class="true" />
-		-->
-	
+	<!-- 开启注解事务 只对当前配置文件有效 <tx:annotation-driven transaction-manager="transactionManager" 
+		proxy-target-class="true" /> -->
+
 	<!-- 配置Hibernate事务管理器 -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 	<aop:aspectj-autoproxy proxy-target-class="true" />
-	
+
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="get*" read-only="true" />
 			<tx:method name="select*" read-only="true" />
-			<tx:method name="add*" isolation="READ_COMMITTED" rollback-for="Exception" />
-			<tx:method name="update*" isolation="READ_COMMITTED" rollback-for="Exception" />
-			<tx:method name="delete*" isolation="READ_COMMITTED" rollback-for="Exception" />
+			<tx:method name="add*" isolation="READ_COMMITTED"
+				rollback-for="Exception" />
+			<tx:method name="update*" isolation="READ_COMMITTED"
+				rollback-for="Exception" />
+			<tx:method name="delete*" isolation="READ_COMMITTED"
+				rollback-for="Exception" />
 		</tx:attributes>
 	</tx:advice>
 	<!-- 在service层实现事务控制 -->
 	<aop:config>
-		<aop:pointcut expression="execution(* cn.myth.MoodBlog.service.*.*(..))" id="pointCut" />
+		<aop:pointcut expression="execution(* cn.myth.MoodBlog.service.*.*(..))"
+			id="pointCut" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut" />
 	</aop:config>
-    
-    <aop:aspectj-autoproxy proxy-target-class="true" />
 
-	
-	
-	
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+
+	<bean id="exceptionResolver" class="cn.myth.MoodBlog.base.BaseExceptionResolver" />
+
+
+
 </beans> 

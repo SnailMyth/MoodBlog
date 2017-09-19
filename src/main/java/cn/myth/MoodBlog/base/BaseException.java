@@ -1,10 +1,13 @@
 package cn.myth.MoodBlog.base;
 
-public class BaseException {
+public class BaseException extends RuntimeException{
 
 	/**
 	 * 
 	 */
+	public BaseException(String message) {
+		super(message);
+	}
 	@SuppressWarnings("unused")
 	private static final long serialVersionUID = 1L;
 	
@@ -17,4 +20,5 @@ public class BaseException {
 	public void setError(MythError error) {
 		this.error = error;
 	}
+	
 }

@@ -75,7 +75,7 @@
 
 
 
-		<!-- hibernate内置日志记录所需包 -->
+		<!-- hibernate内置日志记录所需包 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -92,7 +92,7 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency>-->
 
 		<!-- mysql -->
 		<dependency>

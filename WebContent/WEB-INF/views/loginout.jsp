@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,7 +20,6 @@
 </style>
 </head>
 <body>
-	<c:import url="head.jsp"></c:import>
 	<div class="container"
 		style="margin-top: 10%; background-image: img/back.jpg">
 		<div class="jumbotron">
@@ -37,14 +35,13 @@
 							placeholder="username">
 					</div>
 					<div class="input-group h60" style="margin-top: 5px;">
-						<span class="input-group-addon">@</span> <input name="password"
-							style="" style="" type="password" class="form-control h60">
+						<span class="input-group-addon" >@</span> <input name="password"
+							style="" style="" type="password"
+							class="form-control h60">
 					</div>
 					<div class="input-group h60" style="margin-top: 10px;">
-						<input type="submit" value="Sign In" class="btn btn-primary"
-							style="margin-left: 190px;"> <input type="button"
-							value="Sign Up" class="btn btn-primary"
-							style="margin-left: 10px;">
+						<input type="submit" value="Sign In" class="btn btn-primary" style="margin-left: 190px;">
+						<input type="button" value="Sign Up" class="btn btn-primary" style="margin-left: 10px;">
 					</div>
 					<br>
 				</form>

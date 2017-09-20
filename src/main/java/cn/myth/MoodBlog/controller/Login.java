@@ -7,15 +7,15 @@
  */
 package cn.myth.MoodBlog.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-import cn.myth.MoodBlog.base.BaseException;
-import cn.myth.MoodBlog.base.MythError;
 import cn.myth.MoodBlog.base.ResultData;
 import cn.myth.MoodBlog.entity.User;
 import cn.myth.MoodBlog.service.UserService;
@@ -51,16 +51,16 @@ public class Login {
 		return data;
 	}
 
-
 	@RequestMapping("/login")
-	@ResponseBody
-	public ResultData<Boolean> login(@RequestParam("username") String username,
-			@RequestParam("password") String password) {
+	public String login(@RequestParam("username") String username, @RequestParam("password") String password,
+			HttpServletRequest req, HttpServletResponse resp){
 		User user = new User();
 		user.setPasswd(password);
 		user.setUsername(username);
-		ResultData<Boolean> data = new ResultData<Boolean>();
-		data.setData(service.login(user));
-		return data;
+		if (service.login(user)) {
+			req.setAttribute("user", user);
+			return "main";
+		}
+		return "loginout";
 	}
 }

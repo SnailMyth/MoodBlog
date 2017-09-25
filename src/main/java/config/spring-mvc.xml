@@ -35,6 +35,7 @@
 			<mvc:exclude-mapping path="/loginout" />
 			<mvc:exclude-mapping path="/register" />
 			<mvc:exclude-mapping path="/check" />
+			<mvc:exclude-mapping path="/add" />
 			<mvc:exclude-mapping path="/img/**" />
 			<mvc:exclude-mapping path="/css/**" />
 			<mvc:exclude-mapping path="/bootstrap/**" />

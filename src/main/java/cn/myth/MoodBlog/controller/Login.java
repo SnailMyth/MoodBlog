@@ -45,16 +45,29 @@ public class Login {
 
 	@RequestMapping("/add")
 	@ResponseBody
-	public ResultData<Boolean> add(@RequestParam("username") String username,
-			@RequestParam("password") String password) {
-
-		User user = new User();
-		user.setUsername(username);
-		user.setPasswd(password);
+	public ResultData<Boolean> add(@RequestParam("username") String username, @RequestParam("passwd") String password,
+			@RequestParam("repasswd") String repassword,HttpServletRequest req) {
+		username = username.trim();
+		password = password.trim();
+		repassword = repassword.trim();
 		ResultData<Boolean> data = new ResultData<Boolean>();
-		service.addUser(user);
-		data.setData(false);
-		data.setData(true);
+		if (!password.equals(repassword)) {
+			data.setCode(2);
+			data.setData(false);
+			data.setMessgae("两次密码不一致");
+		}else{
+			User user = new User();
+			user.setUsername(username);
+			user.setPasswd(password);
+			try {
+				service.addUser(user);
+				req.getSession().setAttribute("user", user);
+				data.setData(true);
+			} catch (Exception e) {
+				System.out.println("aaa");
+				data.setData(false);
+			}
+		}
 		return data;
 	}
 

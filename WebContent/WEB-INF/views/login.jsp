@@ -16,8 +16,11 @@
 }
 </style>
 <script type="text/javascript">
-
-
+$(document).ready(function(){
+  $(".b_sign").click(function(){
+	  window.location.href="<%=basePath%>/register"; 
+  });
+});
 </script>
 </head>
 <body>
@@ -42,7 +45,7 @@
 					</div>
 					<div class="input-group h60" style="margin-top: 10px;">
 						<input type="submit" value="Sign In" class="btn btn-primary" style="margin-left: 190px;">
-						<input type="button" value="Sign Up" class="btn btn-primary" style="margin-left: 10px;">
+						<input type="button" value="Sign Up" class="btn btn-primary b_sign" style="margin-left: 10px;">
 					</div>
 					<br>
 				</form>

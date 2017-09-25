@@ -20,18 +20,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.myth.MoodBlog.base.ResultData;
 import cn.myth.MoodBlog.entity.User;
-import cn.myth.MoodBlog.service.UserService;
+import cn.myth.MoodBlog.service.LoginService;
 
 @Controller
 public class Login {
 
 	@Autowired
-	public UserService service;
+	public LoginService service;
 
 	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
+
 	@RequestMapping("/register")
 	public String register() {
 		return "register";
@@ -65,9 +66,9 @@ public class Login {
 		user.setUsername(username);
 		if (service.login(user)) {
 			req.getSession().setAttribute("user", user);
-			resp.sendRedirect(req.getContextPath()+"/");
+			resp.sendRedirect(req.getContextPath() + "/");
 		} else {
-			resp.sendRedirect(req.getContextPath()+"/login");
+			resp.sendRedirect(req.getContextPath() + "/login");
 		}
 	}
 
@@ -75,7 +76,7 @@ public class Login {
 	public void loginout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		req.getSession().removeAttribute("user");
 		req.getSession().invalidate();
-		resp.sendRedirect(req.getContextPath()+"/login");
+		resp.sendRedirect(req.getContextPath() + "/login");
 
 	}
 }

@@ -15,6 +15,7 @@
 			http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 
+
 	<context:property-placeholder location="classpath:/config/jdbc.properties" />
 
 	<!-- 自动扫描dao和service包(自动注入) -->
@@ -24,7 +25,6 @@
 			expression="org.springframework.stereotype.Service" />
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Repository" />
-
 	</context:component-scan>
 
 
@@ -50,13 +50,57 @@
 	</bean>
 
 
-	<!-- 配置sessionFactory，统一管理一个数据库的连接 -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+		<!-- 加入定制化包路径 -->
+		<property name="packagesToScan" value="cn.myth.MoodBlog.entity" />
+
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop><!-- validate/update/create -->
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<!-- 建表的命名规则 -->
+				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 设置JPA实现厂商的特定属性 -->
+    <bean id="hibernateJpaVendorAdapter"
+        class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="databasePlatform" value="${hibernate.dialect}"/>
+    </bean>
+        
+    <!-- Jpa 事务配置 -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+	<!-- Spring Data Jpa配置 -->
+	<jpa:repositories base-package="cn.myth.MoodBlog.repositories"
+		transaction-manager-ref="transactionManager"
+		entity-manager-factory-ref="entityManagerFactory" />
+
+
+	<!-- 使用annotation定义事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+
+
+	<bean id="exceptionResolver" class="cn.myth.MoodBlog.base.BaseExceptionResolver" />
+	
+	
+	<!-- 配置sessionFactory，统一管理一个数据库的连接 
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan">
-			<list>
-				<!-- 可以加多个包，需要hibenate映射的类的包 -->
+			<list>-->
+				<!-- 可以加多个包，需要hibenate映射的类的包
 				<value>cn.myth.MoodBlog.entity</value>
 			</list>
 		</property>
@@ -65,21 +109,23 @@
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
-				<!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop> -->
+				<!-- <prop key="hibernate.current_session_context_class">thread</prop> 
 			</props>
 		</property>
-	</bean>
+	</bean>-->
 
 	<!-- 开启注解事务 只对当前配置文件有效 <tx:annotation-driven transaction-manager="transactionManager" 
 		proxy-target-class="true" /> -->
 
-	<!-- 配置Hibernate事务管理器 -->
+	<!-- 配置Hibernate事务管理器 
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+	</bean>-->
 
+
+	<!-- 
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
@@ -93,18 +139,15 @@
 			<tx:method name="delete*" isolation="READ_COMMITTED"
 				rollback-for="Exception" />
 		</tx:attributes>
-	</tx:advice>
-	<!-- 在service层实现事务控制 -->
+	</tx:advice> -->
+	<!-- 在service层实现事务控制 
 	<aop:config>
 		<aop:pointcut expression="execution(* cn.myth.MoodBlog.service.*.*(..))"
 			id="pointCut" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="pointCut" />
 	</aop:config>
 
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-
-	<bean id="exceptionResolver" class="cn.myth.MoodBlog.base.BaseExceptionResolver" />
-
+	<aop:aspectj-autoproxy proxy-target-class="true" />-->
 
 
 </beans> 

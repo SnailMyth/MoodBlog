@@ -18,55 +18,55 @@
 <script type="text/javascript">
 
 function signUp(){
-	  var username = document.getElementById("username").value;
-	  var password = document.getElementById("password").value;
-	  var repassword = document.getElementById("repassword").value;
-	  console.log(repassword);
+	  var username = document.getElementById("username").value.trim();
+	  var password = document.getElementById("password").value.trim();
+	  var repassword = document.getElementById("repassword").value.trim();
+	  if (password != repassword) {
+		alert("两次密码不一致!");
+		return;
+	}
 	  $.ajax({
 		  	type: "POST",
 		  	url: "<%=basePath%>/add",
 		 	dataType : "json",
 		  	data : {
-				username : username,
-				passwd : password,
-				repasswd : repassword
+		  			username : username,
+		  			passwd : password
 				},
 			success : function(data) {
 				if (data.code == 0) {
 					window.location.href="<%=basePath%>/";
 				}
 			}
-		}
-		);
+		});
 	}
 </script>
 </head>
 <body>
-	<div class="container"
-		style="margin-top: 10%;height: 500px;">
+	<div class="container" style="margin-top: 10%; height: 500px;">
 		<div class="jumbotron">
 			<h1><%=basePath.substring(1)%></h1>
 			<fieldset style="height: 350px;">
 				<legend>Welcome</legend>
-				<form action="<%=basePath%>/add"
-					class="bs-example bs-example-form" role="form"
-					style="margin-left: 20%; width: 500px; height: 200px;">
+				<form action="<%=basePath%>/add" class="bs-example bs-example-form"
+					role="form" style="margin-left: 20%; width: 500px; height: 200px;">
 					<div class="input-group h60" style="">
 						<span class="input-group-addon">@</span> <input id="username"
 							style="" style="" type="text" class="form-control h60"
 							placeholder="username">
 					</div>
 					<div class="input-group h60" style="margin-top: 5px;">
-						<span class="input-group-addon" >@</span> <input id="password"
+						<span class="input-group-addon">@</span> <input id="password"
 							placeholder="password" style="" type="password"
 							class="form-control h60">
 					</div>
 					<div class="input-group h60" style="margin-top: 5px;">
-						<span class="input-group-addon" >@</span> <input id="repassword"
+						<span class="input-group-addon">@</span> <input id="repassword"
 							placeholder="repeat password" style="" type="password"
 							class="form-control h60">
 					</div>
-					<div class="input-group h60" style="margin-top: 10px;float: right;">
+					<div class="input-group h60"
+						style="margin-top: 10px; float: right;">
 						<input id="b_signup" type="button" value="Sign Up"
 							class="btn btn-primary" style="margin-left: 10px;"
 							onclick="signUp()">

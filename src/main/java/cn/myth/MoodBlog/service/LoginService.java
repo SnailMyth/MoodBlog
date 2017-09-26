@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.myth.MoodBlog.entity.User;
+import cn.myth.MoodBlog.entity.UserInfo;
 import cn.myth.MoodBlog.repositories.LoginDao;
+import cn.myth.MoodBlog.repositories.UserInfoDao;
 
 @Service
 @Transactional
@@ -13,7 +15,17 @@ public class LoginService {
 
 	@Autowired
 	public LoginDao dao;
-
+	
+	@Autowired
+	public UserInfoDao infoDao;
+	
+	
+	public void addUserInfo(UserInfo userinfo) {
+		infoDao.save(userinfo);
+	}
+	
+	
+	
 	public User getUser(int id) {
 		User user = dao.findOne(id);
 		return user;

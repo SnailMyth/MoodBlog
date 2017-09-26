@@ -12,7 +12,7 @@ public class BaseExceptionResolver extends AbstractHandlerExceptionResolver {
 	@Override
 	protected ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
-		System.out.println("aaa");
+		System.out.println(ex.getMessage());
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("error");
 		mv.addObject("ex", ex);

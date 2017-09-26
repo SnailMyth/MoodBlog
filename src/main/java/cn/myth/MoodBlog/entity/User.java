@@ -12,18 +12,24 @@ import org.hibernate.annotations.GenericGenerator;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "t_user")
+@Table(name = "user")
 public class User implements Serializable {
 	private int id;
 	private String username;
 	private String passwd;
+	
+	
 
 	public User() {
+	}
 
+	public User(String username, String passwd) {
+		this.username = username;
+		this.passwd = passwd;
 	}
 
 	@Id
-	@Column(name = "u_id", nullable = false, unique = true)
+	@Column(name = "id", nullable = false, unique = true)
 	@GenericGenerator(name = "generator", strategy = "native")
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	public int getId() {

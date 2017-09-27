@@ -13,7 +13,7 @@ public interface LoginDao extends JpaRepository<User,Integer> ,JpaSpecificationE
 
 	
 	@Query("select b from User b where b.id=:id")
-	public User getUserById(@Param("id")String id);
+	public User getUserById(@Param("id")int id);
 	
 	@Query("select b from User b where b.username=:name")
 	public User getUserByName(@Param("name")String name);

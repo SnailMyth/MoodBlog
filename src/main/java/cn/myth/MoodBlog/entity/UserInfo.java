@@ -2,55 +2,23 @@ package cn.myth.MoodBlog.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "userinfo")
 public class UserInfo implements Serializable {
 
-	private int id;
-	private String nickname;
+	private String nick;
 	private String sex;
 	private int age;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn()
-	private User user;
-
-	public UserInfo() {
-		
-	}
-
-	public UserInfo(String nickname, String sex, int age, User user) {
-		this.nickname = nickname;
-		this.sex = sex;
-		this.age = age;
-		this.user = user;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+	private int id;
 
 	@Id
 	@Column(name = "id", nullable = false, unique = true)
-	@GenericGenerator(name = "generator", strategy = "native")
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getId() {
 		return id;
 	}
@@ -59,13 +27,24 @@ public class UserInfo implements Serializable {
 		this.id = id;
 	}
 
+	public UserInfo() {
+
+	}
+
+	public UserInfo(String nickname, String sex, int age, int id) {
+		this.nick = nickname;
+		this.sex = sex;
+		this.age = age;
+		this.id = id;
+	}
+
 	@Column(name = "nick", nullable = false, unique = false, length = 30)
 	public String getNickname() {
-		return nickname;
+		return nick;
 	}
 
 	public void setNickname(String nickname) {
-		this.nickname = nickname;
+		this.nick = nickname;
 	}
 
 	@Column(name = "sex", nullable = false, unique = false, length = 30)
@@ -86,8 +65,13 @@ public class UserInfo implements Serializable {
 		this.age = age;
 	}
 
+	@Override
+	public String toString() {
+		return "UserInfo [nick=" + nick + ", sex=" + sex + ", age=" + age + ", id=" + id + "]";
+	}
+
 	public UserInfo(String nickname, String sex, int age) {
-		this.nickname = nickname;
+		this.nick = nickname;
 		this.sex = sex;
 		this.age = age;
 	}

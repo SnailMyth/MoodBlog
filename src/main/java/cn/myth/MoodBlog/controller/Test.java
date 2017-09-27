@@ -2,21 +2,42 @@ package cn.myth.MoodBlog.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.myth.MoodBlog.base.ResultData;
 import cn.myth.MoodBlog.entity.User;
+import cn.myth.MoodBlog.entity.UserInfo;
+import cn.myth.MoodBlog.service.LoginService;
 
 @Controller
 @RequestMapping("/test")
 public class Test {
+	@Autowired
+	public LoginService service;
 
 	@RequestMapping(value = "/index")
-	public ModelAndView index(User p,HttpServletRequest req) {
-		ModelAndView tmpMAV = new ModelAndView("index");
-		System.out.println(p);
-		req.getSession().setAttribute("user", p);
-		return tmpMAV;
+	public ModelAndView index(HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView("test");
+		User user = service.getUserById(6);
+		// UserInfo userInfo = service.getUserInfo(user);
+		System.out.println(user);
+		mv.addObject("data", user);
+		return mv;
+	}
+
+	@RequestMapping(value = "/addinfo")
+	public @ResponseBody ResultData<UserInfo> addInfo(@RequestParam("nick") String nick, @RequestParam("age") int age,
+			@RequestParam("sex") String sex, HttpServletRequest req) {
+		User user = (User) req.getSession().getAttribute("user");
+		ResultData<UserInfo> result = new ResultData<>();
+		UserInfo userinfo = new UserInfo(nick, sex, age, user.getId());
+		service.addUserInfo(userinfo);
+		return null;
+
 	}
 }

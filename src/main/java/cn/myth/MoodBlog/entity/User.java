@@ -2,25 +2,25 @@ package cn.myth.MoodBlog.entity;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @SuppressWarnings("serial")
+@Embeddable
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
 	private int id;
 	private String username;
 	private String passwd;
-	
-	
 
 	public User() {
+		
 	}
 
 	public User(String username, String passwd) {
@@ -31,7 +31,7 @@ public class User implements Serializable {
 	@Id
 	@Column(name = "id", nullable = false, unique = true)
 	@GenericGenerator(name = "generator", strategy = "native")
-	@GeneratedValue(strategy= GenerationType.AUTO)
+	@GeneratedValue(generator="generator")
 	public int getId() {
 		return id;
 	}

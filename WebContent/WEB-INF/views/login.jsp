@@ -35,12 +35,12 @@ $(document).ready(function(){
 					style="margin-left: 20%; width: 500px; height: 200px;">
 					<div class="input-group h60" style="">
 						<span class="input-group-addon">@</span> <input name="username"
-							style="" style="" type="text" class="form-control h60"
+							type="text" class="form-control h60"
 							placeholder="username">
 					</div>
 					<div class="input-group h60" style="margin-top: 5px;">
 						<span class="input-group-addon" >@</span> <input name="password"
-							style="" style="" type="password"
+							type="password"
 							class="form-control h60">
 					</div>
 					<div class="input-group h60" style="margin-top: 10px;">

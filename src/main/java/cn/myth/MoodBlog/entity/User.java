@@ -49,7 +49,7 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "passwd", nullable = false, unique = true, length = 50)
+	@Column(name = "passwd", nullable = false, unique = false, length = 50)
 	public String getPasswd() {
 		return passwd;
 	}

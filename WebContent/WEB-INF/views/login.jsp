@@ -16,11 +16,35 @@
 }
 </style>
 <script type="text/javascript">
-$(document).ready(function(){
-  $(".b_sign").click(function(){
-	  window.location.href="<%=basePath%>/register"; 
-  });
-});
+
+
+function register(){
+	window.location.href="<%=basePath%>/register"; 
+}
+
+
+
+function login(){
+	var username = document.getElementById("username").value.trim();
+	var password = document.getElementById("password").value.trim();
+	
+	$.ajax({
+		type: "POST",
+		url: "<%=basePath%>/check",
+			dataType : "json",
+			data : {
+				username : username,
+				passwd : password
+			},
+			success : function(data) {
+				if (data.data == null) {
+					alert(data.error_message);
+				}else{
+					window.location.href="<%=basePath%>/"; 
+				}
+			}
+		});
+	}
 </script>
 </head>
 <body>
@@ -30,22 +54,21 @@ $(document).ready(function(){
 			<h1><%=basePath.substring(1)%></h1>
 			<fieldset style="">
 				<legend>Welcome</legend>
-				<form action="<%=basePath%>/check"
-					class="bs-example bs-example-form" role="form"
+				<form class="bs-example bs-example-form" role="form"
 					style="margin-left: 20%; width: 500px; height: 200px;">
 					<div class="input-group h60" style="">
-						<span class="input-group-addon">@</span> <input name="username"
-							type="text" class="form-control h60"
-							placeholder="username">
+						<span class="input-group-addon">@</span> <input id="username"
+							type="text" class="form-control h60" placeholder="username">
 					</div>
 					<div class="input-group h60" style="margin-top: 5px;">
-						<span class="input-group-addon" >@</span> <input name="password"
-							type="password"
-							class="form-control h60">
+						<span class="input-group-addon">@</span> <input id="password"
+							type="password" class="form-control h60">
 					</div>
 					<div class="input-group h60" style="margin-top: 10px;">
-						<input type="submit" value="Sign In" class="btn btn-primary" style="margin-left: 190px;">
-						<input type="button" value="Sign Up" class="btn btn-primary b_sign" style="margin-left: 10px;">
+						<input type="button" value="Sign In" class="btn btn-primary"
+							style="margin-left: 190px;" onclick="login()" /> <input
+							type="button" value="Sign Up" class="btn btn-primary b_sign"
+							style="margin-left: 10px;" onclick="register()" />
 					</div>
 					<br>
 				</form>

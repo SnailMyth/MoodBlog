@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.myth.MoodBlog.base.ApiModel;
 import cn.myth.MoodBlog.base.ResultData;
 import cn.myth.MoodBlog.entity.User;
 import cn.myth.MoodBlog.entity.UserInfo;
@@ -31,12 +32,17 @@ public class Test {
 	}
 
 	@RequestMapping(value = "/addinfo")
-	public @ResponseBody ResultData<UserInfo> addInfo(@RequestParam("nick") String nick, @RequestParam("age") int age,
+	public @ResponseBody ApiModel addInfo(@RequestParam("nick") String nick, @RequestParam("age") int age,
 			@RequestParam("sex") String sex, HttpServletRequest req) {
 		User user = (User) req.getSession().getAttribute("user");
 		ResultData<UserInfo> result = new ResultData<>();
 		UserInfo userinfo = new UserInfo(nick, sex, age, user.getId());
-		service.addUserInfo(userinfo);
+		System.out.println(userinfo);
+		UserInfo info = service.addUserInfo(userinfo);
+		if (null == info) {
+
+		}
+		result.setData(info);
 		return null;
 
 	}

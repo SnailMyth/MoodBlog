@@ -13,9 +13,6 @@
 			http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
 			http://www.springframework.org/schema/data/jpa 
 			http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
-
-
-
 	<context:property-placeholder location="classpath:/config/jdbc.properties" />
 
 	<!-- 自动扫描dao和service包(自动注入) -->

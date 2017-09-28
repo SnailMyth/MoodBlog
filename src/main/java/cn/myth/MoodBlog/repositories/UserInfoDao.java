@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import cn.myth.MoodBlog.entity.UserInfo;
+import cn.myth.MoodBlog.data.UserInfo;
 
 @Repository
 public interface UserInfoDao extends JpaRepository<UserInfo,Integer> ,JpaSpecificationExecutor<UserInfo>{

@@ -3,7 +3,7 @@ package cn.myth.MoodBlog.base;
 import java.text.MessageFormat;
 
 public enum Errors implements Error {
-	SAVE_FAIL("add {0} fail"),
+	SAVE_FAIL("add {0} fail,{1}"),
 	Login_FAIL("login fail,{0}");
 
 	;

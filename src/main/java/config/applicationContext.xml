@@ -52,7 +52,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
 		<!-- 加入定制化包路径 -->
-		<property name="packagesToScan" value="cn.myth.MoodBlog.entity" />
+		<property name="packagesToScan" value="cn.myth.MoodBlog.data" />
 
 		<property name="jpaProperties">
 			<props>

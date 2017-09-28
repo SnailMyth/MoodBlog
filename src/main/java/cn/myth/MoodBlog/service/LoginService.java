@@ -1,14 +1,16 @@
 package cn.myth.MoodBlog.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.myth.MoodBlog.base.BaseException;
 import cn.myth.MoodBlog.base.Errors;
-import cn.myth.MoodBlog.base.Result;
-import cn.myth.MoodBlog.entity.User;
-import cn.myth.MoodBlog.entity.UserInfo;
+import cn.myth.MoodBlog.base.ResultData;
+import cn.myth.MoodBlog.data.User;
+import cn.myth.MoodBlog.data.UserInfo;
 import cn.myth.MoodBlog.repositories.LoginDao;
 import cn.myth.MoodBlog.repositories.UserInfoDao;
 
@@ -37,8 +39,14 @@ public class LoginService {
 		return user;
 	}
 
-	public void addUser(User user) {
-		dao.save(user);
+	public User addUser(User user) {
+		User save = dao.save(user);
+		UserInfo info = new UserInfo();
+		info.setId(save.getId());
+		info.setRegisterTime(new Date());
+		info.setNick("新用户" + (100000 + save.getId()));
+		infoDao.save(info);
+		return user;
 	}
 
 	public UserInfo addUserInfo(UserInfo userinfo) {
@@ -55,14 +63,16 @@ public class LoginService {
 		return null;
 	}
 
-	public Result login(User user) {
-		Result result = new Result();
+	public ResultData<User> login(User user) {
+		ResultData<User> result = new ResultData<>();
 		User res = dao.getUserByName(user.getUsername());
 		if (res != null) {
 			if (!user.getPasswd().equals(res.getPasswd())) {
 				result.setException(BaseException.create(Errors.Login_FAIL, "password is wrong"));
+			}else {
+				result.setData(res);
 			}
-		}else {
+		} else {
 			result.setException(BaseException.create(Errors.Login_FAIL, "user not exsist"));
 		}
 		return result;

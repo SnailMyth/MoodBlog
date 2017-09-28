@@ -11,8 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.myth.MoodBlog.base.ApiModel;
 import cn.myth.MoodBlog.base.ResultData;
-import cn.myth.MoodBlog.entity.User;
-import cn.myth.MoodBlog.entity.UserInfo;
+import cn.myth.MoodBlog.data.User;
+import cn.myth.MoodBlog.data.UserInfo;
 import cn.myth.MoodBlog.service.LoginService;
 
 @Controller
@@ -36,7 +36,7 @@ public class Test {
 			@RequestParam("sex") String sex, HttpServletRequest req) {
 		User user = (User) req.getSession().getAttribute("user");
 		ResultData<UserInfo> result = new ResultData<>();
-		UserInfo userinfo = new UserInfo(nick, sex, age, user.getId());
+		UserInfo userinfo =null;
 		System.out.println(userinfo);
 		UserInfo info = service.addUserInfo(userinfo);
 		if (null == info) {

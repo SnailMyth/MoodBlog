@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.myth.MoodBlog.base.ApiModel;
 import cn.myth.MoodBlog.base.BaseException;
 import cn.myth.MoodBlog.base.Errors;
-import cn.myth.MoodBlog.base.Result;
-import cn.myth.MoodBlog.entity.User;
+import cn.myth.MoodBlog.base.ResultData;
+import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.service.LoginService;
 
 @Controller
@@ -51,12 +51,12 @@ public class Login {
 		ApiModel model = new ApiModel();
 		if (user != null) {
 			try {
-				service.addUser(user);
-				System.out.println(service.getUserByName(user.getUsername()));
-				req.getSession().setAttribute("user", service.getUserByName(user.getUsername()));
-				model.setData(user);
+				user.active();
+				User get = service.addUser(user);
+				req.getSession().setAttribute("user", get);
+				model.setData(get);
 			} catch (Exception e) {
-				model.setError(BaseException.create(Errors.SAVE_FAIL, "user"));
+				model.setError(BaseException.create(Errors.SAVE_FAIL, "user", e.getMessage()));
 			}
 		}
 		return model;
@@ -66,9 +66,9 @@ public class Login {
 	@ResponseBody
 	public ApiModel check(User user, HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		ApiModel model = new ApiModel();
-		Result result = service.login(user);
+		ResultData<User> result = service.login(user);
 		if (result.isSuccess()) {
-			User loginUser = service.getUserByName(user.getUsername());
+			User loginUser = result.getData();
 			req.getSession().setAttribute("user", loginUser);
 			model.setData("login success!");
 		} else {

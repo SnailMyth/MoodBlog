@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import cn.myth.MoodBlog.entity.User;
+import cn.myth.MoodBlog.data.User;
 
 @Repository
 public interface LoginDao extends JpaRepository<User,Integer> ,JpaSpecificationExecutor<User>{

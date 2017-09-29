@@ -2,7 +2,6 @@ package cn.myth.MoodBlog.data;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -13,7 +12,6 @@ import org.hibernate.annotations.GenericGenerator;
 import cn.myth.MoodBlog.base.Jsons;
 
 @SuppressWarnings("serial")
-@Embeddable
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
@@ -87,4 +85,5 @@ public class User implements Serializable {
 	public void active() {
 		this.setActive(true);
 	}
+	
 }

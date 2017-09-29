@@ -44,6 +44,8 @@ public class Login {
 	public String login() {
 		return "login";
 	}
+	
+
 
 	@RequestMapping("/add")
 	@ResponseBody

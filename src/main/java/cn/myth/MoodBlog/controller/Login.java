@@ -32,7 +32,7 @@ public class Login {
 
 	@RequestMapping("/")
 	public String index() {
-		return "index";
+		return "login";
 	}
 
 	@RequestMapping("/register")
@@ -45,7 +45,10 @@ public class Login {
 		return "login";
 	}
 	
-
+	@RequestMapping("/admin")
+	public String admin() {
+		return "admin";
+	}
 
 	@RequestMapping("/add")
 	@ResponseBody

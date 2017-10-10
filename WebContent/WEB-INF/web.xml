@@ -4,39 +4,15 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
 	<display-name>MoodDiary</display-name>
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>index.html</welcome-file>
-	</welcome-file-list>
-
-
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath*:/config/applicationContext.xml</param-value>
 	</context-param>
+	
 
-	<!-- Character Filter -->
-	<filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>*.html</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping>
+
+	
 
 	<!--spring打开session及事务配置 
 	<filter>
@@ -50,8 +26,8 @@
 
 	<!-- 配置spring管理OpenEntityManagerInViewFilter-->
     <!-- OpenEntityManagerInViewFilter会让session一直到view层调用结束后才关闭
-        Spring针对Hibernate的非JPA实现用的是OpenSessionInViewFilter，原理与这个大同小异
-     -->
+        Spring针对Hibernate的非JPA实现用的是OpenSessionInViewFilter，原理与这个大同小异-->
+     
     <filter>
         <filter-name>hibernateFilter</filter-name>
         <filter-class>
@@ -66,7 +42,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -80,13 +56,36 @@
 		<servlet-name>spring</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	<error-page>
-	<error-code>404</error-code>
-	<location>/404</location>
-	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/500</location>
-	</error-page>
-
+	
+	<!-- Character Filter -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<!-- -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>
+			org.springframework.web.filter.DelegatingFilterProxy
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	 
+	
 </web-app>

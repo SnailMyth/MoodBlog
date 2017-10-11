@@ -10,44 +10,29 @@
 	String basePath = request.getContextPath();
 %>
 <c:import url="head.jsp"></c:import>
-<style type="text/css">
-.h60 {
-	height: 60px;
-}
 </style>
 </head>
 <body>
-
-	Test Page!!
-	<br />
-	<label>${data}</label>
-
-	<div class="jumbotron">
-		<h1><%=basePath.substring(1)%></h1>
-		<fieldset style="">
-			<legend>Welcome</legend>
-			<form action="<%=basePath%>/test/addinfo"
-				class="bs-example bs-example-form" role="form"
-				style="margin-left: 20%; width: 500px; height: 200px;">
-				<div class="input-group h60" style="">
-					<span class="input-group-addon">@</span> <input name="nick"
-						style="" type="text" class="form-control h60" placeholder="nick">
-				</div>
-				<div class="input-group h60" style="margin-top: 5px;">
-					<span class="input-group-addon">@</span> <input name="age"
-						type="text" class="form-control h60">
-				</div>
-				<div class="input-group h60" style="margin-top: 5px;">
-					<span class="input-group-addon">@</span> <input name="nick"
-						style="" type="text" class="form-control h60">
-				</div>
-				<div class="input-group h60" style="margin-top: 10px;">
-					<input type="submit" value="Update" class="btn btn-primary"
-						style="margin-left: 190px;">
-				</div>
-				<br>
-			</form>
-		</fieldset>
+	<div class="container">
+		<div class="error ${param.error == true ? '' : 'hide'}">
+			登陆失败<br>
+			${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message}
+		</div>
+		<c:url value="/login" var="loginUrl" />
+		<form method="post"
+			action="${loginUrl}"
+			style="width: 260px; text-align: center">
+			<fieldset>
+				<legend>登陆</legend>
+				用户： <input type="text" name="j_username" style="width: 150px;"
+					value="${sessionScope['SPRING_SECURITY_LAST_USERNAME']}" /><br />
+				密码： <input type="password" name="j_password" style="width: 150px;" /><br />
+				<input type="checkbox" name="_spring_security_remember_me" />两周之内不必登陆<br />
+				<input type="submit" value="登陆" /> <input type="reset" value="重置" />
+				
+			</fieldset>
+		</form>
 	</div>
+
 </body>
 </html>

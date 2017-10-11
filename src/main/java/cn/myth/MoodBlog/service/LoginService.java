@@ -11,7 +11,7 @@ import cn.myth.MoodBlog.base.Errors;
 import cn.myth.MoodBlog.base.ResultData;
 import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.data.UserInfo;
-import cn.myth.MoodBlog.repositories.LoginDao;
+import cn.myth.MoodBlog.repositories.UserDao;
 import cn.myth.MoodBlog.repositories.UserInfoDao;
 
 @Service
@@ -19,7 +19,7 @@ import cn.myth.MoodBlog.repositories.UserInfoDao;
 public class LoginService {
 
 	@Autowired
-	public LoginDao dao;
+	public UserDao dao;
 
 	@Autowired
 	public UserInfoDao infoDao;

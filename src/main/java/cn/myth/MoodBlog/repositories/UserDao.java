@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import cn.myth.MoodBlog.data.User;
 
 @Repository
-public interface LoginDao extends JpaRepository<User,Integer> ,JpaSpecificationExecutor<User>{
+public interface UserDao extends JpaRepository<User,Integer> ,JpaSpecificationExecutor<User>{
 
 	
 	@Query("select b from User b where b.id=:id")

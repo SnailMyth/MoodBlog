@@ -30,26 +30,25 @@ public class Login {
 	@Autowired
 	public LoginService service;
 
-	@RequestMapping("/")
-	public String index() {
+	@RequestMapping(value= {"/","/login"})
+	public String main() {
 		return "login";
+	}
+	
+	@RequestMapping("/index")
+	public String index() {
+		return "index";
 	}
 
 	@RequestMapping("/register")
 	public String register() {
 		return "register";
 	}
-
-	@RequestMapping("/login")
-	public String login() {
-		return "login";
-	}
-	
 	@RequestMapping("/admin")
 	public String admin() {
 		return "admin";
 	}
-
+	
 	@RequestMapping("/add")
 	@ResponseBody
 	public ApiModel add(User user, HttpServletRequest req) {
@@ -70,6 +69,7 @@ public class Login {
 	@RequestMapping("/check")
 	@ResponseBody
 	public ApiModel check(User user, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		System.out.println("check");
 		ApiModel model = new ApiModel();
 		ResultData<User> result = service.login(user);
 		if (result.isSuccess()) {
@@ -86,7 +86,7 @@ public class Login {
 	public void loginout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		req.getSession().removeAttribute("user");
 		req.getSession().invalidate();
-		resp.sendRedirect(req.getContextPath() + "/login");
+		resp.sendRedirect(req.getContextPath() + "/");
 
 	}
 }

@@ -28,6 +28,12 @@ public class Test {
 	@RequestMapping("/test")
 	public String test() {
 		System.out.println("get test page");
-		return "timeline";
+		return "test";
+	}
+	
+	@RequestMapping("/accessDenied")
+	public String accessDenied() {
+		System.out.println("get accessDenied page");
+		return "accessDenied";
 	}
 }

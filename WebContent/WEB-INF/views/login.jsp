@@ -30,17 +30,17 @@ function login(){
 	
 	$.ajax({
 		type: "POST",
-		url: "<%=basePath%>/check",
+		url: "<%=basePath%>/login",
 			dataType : "json",
 			data : {
-				username : username,
-				passwd : password
+				j_username : username,
+				j_password : password
 			},
 			success : function(data) {
 				if (data.data == null) {
 					alert(data.error_message);
 				}else{
-					window.location.href="<%=basePath%>/"; 
+					alert("aa");
 				}
 			}
 		});
@@ -48,25 +48,26 @@ function login(){
 </script>
 </head>
 <body>
+<!-- window.location.href="<%=basePath%>/index";  -->
 	<div class="container"
 		style="margin-top: 10%; background-image: img/back.jpg">
 		<div class="jumbotron">
 			<h1><%=basePath.substring(1)%></h1>
 			<fieldset style="">
 				<legend>Welcome</legend>
-				<form class="bs-example bs-example-form" role="form"
+				<form method="POST" class="bs-example bs-example-form" action="<c:url value='j_spring_security_check'/>"
 					style="margin-left: 20%; width: 500px; height: 200px;">
 					<div class="input-group h60" style="">
-						<span class="input-group-addon">@</span> <input id="username"
+						<span class="input-group-addon">@</span> <input id="username" name="j_username"
 							type="text" class="form-control h60" placeholder="username">
 					</div>
 					<div class="input-group h60" style="margin-top: 5px;">
-						<span class="input-group-addon">@</span> <input id="password"
+						<span class="input-group-addon">@</span> <input id="password" name="j_password"
 							type="password" class="form-control h60">
 					</div>
 					<div class="input-group h60" style="margin-top: 10px;">
-						<input type="button" value="Sign In" class="btn btn-primary"
-							style="margin-left: 190px;" onclick="login()" /> <input
+						<input type="submit" value="Sign In" class="btn btn-primary"
+							style="margin-left: 190px;"  /> <input
 							type="button" value="Sign Up" class="btn btn-primary b_sign"
 							style="margin-left: 10px;" onclick="register()" />
 					</div>

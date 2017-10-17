@@ -39,7 +39,7 @@ public class UserDetail implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		if (roles == null ||!roles.isEmpty()) {
 			List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-			GrantedAuthority au = new SimpleGrantedAuthority("ROLE_USER");
+			GrantedAuthority au = new SimpleGrantedAuthority("ROLE_ADMIN");
 			list.add(au);
 			return list;
 		}

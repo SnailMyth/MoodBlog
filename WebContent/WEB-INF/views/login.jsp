@@ -58,11 +58,11 @@ function login(){
 				<form method="POST" class="bs-example bs-example-form" action="<c:url value='j_spring_security_check'/>"
 					style="margin-left: 20%; width: 500px; height: 200px;">
 					<div class="input-group h60" style="">
-						<span class="input-group-addon">@</span> <input id="username" name="j_username"
+						<span class="input-group-addon">@</span> <input id="username" name="username"
 							type="text" class="form-control h60" placeholder="username">
 					</div>
 					<div class="input-group h60" style="margin-top: 5px;">
-						<span class="input-group-addon">@</span> <input id="password" name="j_password"
+						<span class="input-group-addon">@</span> <input id="password" name="password"
 							type="password" class="form-control h60">
 					</div>
 					<div class="input-group h60" style="margin-top: 10px;">

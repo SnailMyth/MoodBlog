@@ -20,24 +20,32 @@
 			authentication-failure-url="/accessDenied" />
 		<security:logout invalidate-session="true"
 			logout-success-url="/" logout-url="/logout" />
+		<!-- 自定义过滤器 -->
 		<security:custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" /> 
 		<security:csrf disabled="true" />
 	</security:http>
+	
+	
+	<!-- 认证管理器 -->
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider >
-			<security:jdbc-user-service
+		<security:authentication-provider user-service-ref="myUserDetailsService" />
+		
+			<!-- <security:jdbc-user-service
 				data-source-ref="dataSource" id="usersService"
 				users-by-username-query="select username,passwd as password,active as enabled from user where username = ?"
-				authorities-by-username-query="select user.username,role.name from user,role,user_role where user.id=user_role.user_id and user_role.role_id=role.id and user.username=?" />
-		</security:authentication-provider>
+				authorities-by-username-query="select user.username,role.name from user,role,user_role where user.id=user_role.user_id and user_role.role_id=role.id and user.username=?" /> -->
+		
 	</security:authentication-manager>
+	<bean id="myUserDetailsService" class="cn.myth.MoodBlog.security.MyUserDetailsService" />
+	
+	
 	
     <!-- 认证过滤器 -->  
     <bean id="filterSecurityInterceptor"  
         class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">  
         <!-- 用户拥有的权限 -->  
         <property name="accessDecisionManager" ref="accessDecisionManager" />  
-        <!-- 用户是否拥有所请求资源的权限 -->  
+        <!-- 处理来自于框架其他部分的认证请求-->  
         <property name="authenticationManager" ref="authenticationManager" />  
         <!-- 资源与权限对应关系 -->  
         <property name="securityMetadataSource" ref="securityMetadataSource" />  

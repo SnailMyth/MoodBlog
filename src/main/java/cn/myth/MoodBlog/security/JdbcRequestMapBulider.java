@@ -40,8 +40,13 @@ public class JdbcRequestMapBulider extends JdbcDaoSupport {
 		for (Resource resource : resourceList) {
 			RequestMatcher requestMatcher = this.getRequestMatcher(resource.getUrl());
 			List<ConfigAttribute> list = new ArrayList<ConfigAttribute>();
-			list.add(new SecurityConfig(resource.getRole()));
-			requestMap.put(requestMatcher, list);
+			if (requestMap.containsKey(requestMatcher)) {
+				requestMap.get(requestMatcher).add(new SecurityConfig(resource.getRole()));
+			}
+			else {
+				list.add(new SecurityConfig(resource.getRole()));
+				requestMap.put(requestMatcher, list);
+			}
 		}
 		return requestMap;
 	}

@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -15,26 +17,41 @@ import cn.myth.MoodBlog.base.Jsons;
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
+	@Id
+	@Column(name = "id", nullable = false, unique = true)
+	@GenericGenerator(name = "generator", strategy = "native")
+	@GeneratedValue(generator="generator")
 	private int id;
+	@Column(name = "username", nullable = false, unique = true, length = 32)
 	private String username;
+	@Column(name = "passwd", nullable = false, unique = false, length = 32)
 	private String passwd;
+	@Column(name = "active", nullable = false, unique = false)
 	private boolean active = false;
-
+	
+	@OneToOne
+	@JoinColumn(name = "role_id")
+	private Roles roles;
 	
 
+	
 	public User() {
-		
 	}
+	
 
 	public User(String username, String passwd) {
 		this.username = username;
 		this.passwd = passwd;
 	}
 
-	@Id
-	@Column(name = "id", nullable = false, unique = true)
-	@GenericGenerator(name = "generator", strategy = "native")
-	@GeneratedValue(generator="generator")
+	public Roles getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Roles roles) {
+		this.roles = roles;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -43,7 +60,7 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "username", nullable = false, unique = true, length = 32)
+	
 	public String getUsername() {
 		return username;
 	}
@@ -52,7 +69,7 @@ public class User implements Serializable {
 		this.username = username;
 	}
 
-	@Column(name = "passwd", nullable = false, unique = false, length = 32)
+	
 	public String getPasswd() {
 		return passwd;
 	}
@@ -68,7 +85,7 @@ public class User implements Serializable {
 		this.passwd = passwd;
 	}
 	
-	@Column(name = "active", nullable = false, unique = false)
+	
 	public boolean isActive() {
 		return active;
 	}

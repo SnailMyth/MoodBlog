@@ -1,7 +1,9 @@
 package cn.myth.MoodBlog.data;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,11 +24,32 @@ public class Roles implements Serializable {
 	private String des;
 	
 	
-	@ManyToOne
+	@ElementCollection
+	@ManyToOne()
 	@JoinColumn(name = "res_id")
-	private Resource res;
+	private List<Resource> res;
 	
 	
+	
+	public Roles() {
+		
+	}
+
+	public List<Resource> getRes() {
+		return res;
+	}
+
+	public void setRes(List<Resource> res) {
+		this.res = res;
+	}
+
+	public Roles(int id, String name, String des, List<Resource> res) {
+		this.id = id;
+		this.name = name;
+		this.des = des;
+		this.res = res;
+	}
+
 	public int getId() {
 		return id;
 	}

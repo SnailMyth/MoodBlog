@@ -2,6 +2,8 @@ package cn.myth.MoodBlog.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import cn.myth.MoodBlog.data.Roles;
+
 public class Role implements GrantedAuthority{
 	
 	/**
@@ -36,6 +38,18 @@ public class Role implements GrantedAuthority{
 
 	public void setAuthority(String authority) {
 		this.authority = authority;
+	}
+	
+	public Role initByDB(Roles roles) {
+		this.id=roles.getId();
+		this.des=roles.getDes();
+		this.authority=roles.getName();
+		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", authority=" + authority + ", des=" + des + "]";
 	}
 
 }

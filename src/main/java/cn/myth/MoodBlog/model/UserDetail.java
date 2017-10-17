@@ -37,7 +37,7 @@ public class UserDetail implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if (roles == null ||!roles.isEmpty()) {
+		if (roles == null || !roles.isEmpty()) {
 			List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 			GrantedAuthority au = new SimpleGrantedAuthority("ROLE_ADMIN");
 			list.add(au);
@@ -82,17 +82,34 @@ public class UserDetail implements UserDetails {
 		return disabled;
 	}
 
-	public void copyDbUser(User user) {
+	public UserDetail initByDB(User user) {
 		this.username = user.getUsername();
 		this.password = user.getPasswd();
 		this.disabled = user.isActive();
+		if (user.getRoles() != null) {
+			if (roles == null) {
+				roles = new ArrayList<>();
+			} else {
+				roles.clear();
+			}
+			roles.add(new Role().initByDB(user.getRoles()));
+		}
+		return this;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void addRole(Collection<? extends GrantedAuthority> authorities) {
 		if (authorities != null) {
 			roles = (List<Role>) authorities;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "UserDetail [username=" + username + ", password=" + password + ", disabled=" + disabled + ", roles="
+				+ roles + "]";
+	}
+	
+	
 
 }

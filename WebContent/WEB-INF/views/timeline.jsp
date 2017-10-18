@@ -12,44 +12,56 @@
 	media="screen">
 <link rel="stylesheet" href="css/colorbox.css" type="text/css"
 	media="screen">
-	
+
 <script type="text/javascript" src="js/colorbox.js"></script>
 <script type="text/javascript" src="js/timeliner.min.js"></script>
+
+
 <script>
-		$(document).ready(function() {
-			$.timeliner({
-				startOpen : [ '#19550828EX', '#19630828EX' ]
-			});
-			$.timeliner({
-				timelineContainer : '#timelineContainer_2'
-			});
-			// Colorbox Modal
-			$(".CBmodal").colorbox({
-				inline : true,
-				initialWidth : 100,
-				maxWidth : 682,
-				initialHeight : 100,
-				transition : "elastic",
-				speed : 750
-			});
+	$(document).ready(function() {
+		$.timeliner({
+			startOpen : [ '#19550828EX', '#19630828EX' ]
 		});
-	</script>
+		$.timeliner({
+			timelineContainer : '#timelineContainer_2'
+		});
+		// Colorbox Modal
+		$(".CBmodal").colorbox({
+			inline : true,
+			initialWidth : 100,
+			maxWidth : 682,
+			initialHeight : 100,
+			transition : "elastic",
+			speed : 750
+		});
+	});
+</script>
+<style>
+</style>
+
 <title>Insert title here</title>
 </head>
 <body>
+	<div>
+		<%@ include file="header.jsp"%>
+	</div>
+
+	<article>
 	<div class="container">
+		<div class="banner">
+			<p data-scroll-reveal="enter top over 2s">我们不停的翻弄着回忆，却再也找不回那时的自己</p>
+			<p data-scroll-reveal="enter left over 2s after 1s">人生，是一场盛大的遇见。若你懂得，就请珍惜。</p>
+			<p data-scroll-reveal="enter bottom over 2s after 2s">无论下多久的雨，最后都会有彩虹；无论你多么悲伤，要相信幸福在前方等候.</p>
+		</div>
 		<h1>线性时间轴</h1>
 		<h2>民权运动1954-1964</h2>
 		<div id="timelineContainer" class="timelineContainer">
-
 			<div class="timelineToggle">
 				<p>
 					<a class="expandAll">+ 全部展开</a>
 				</p>
 			</div>
-
 			<br class="clear">
-
 			<div class="timelineMajor">
 				<h2 class="timelineMajorMarker">
 					<span>1954</span>
@@ -62,7 +74,7 @@
 						<h3>1954年5月17日</h3>
 						<p>美国最高法院相传一致9-0决定在布朗诉托皮卡教育局案，打开大门，民权运动最终种族融合在美国社会的各个方面。推翻Plessy
 							v. Ferguson（1896），法院裁定“隔离的教育设施是不平等的。</p>
-						
+
 					</dd>
 					<!-- /.timelineEvent -->
 				</dl>
@@ -260,9 +272,9 @@
 		<!-- /#timelineContainer -->
 
 	</div>
-	<!-- /.container -->
-
-	<!-- GLOBAL CORE SCRIPTS -->
-
+	<!-- /.container --> <!-- GLOBAL CORE SCRIPTS --> </article>
+	<div>
+		<%@ include file="footer.jsp"%>
+	</div>
 </body>
 </html>

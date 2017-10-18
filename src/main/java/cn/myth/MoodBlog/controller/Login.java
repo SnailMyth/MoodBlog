@@ -97,6 +97,11 @@ public class Login {
 		req.getSession().removeAttribute("user");
 		req.getSession().invalidate();
 		resp.sendRedirect(req.getContextPath() + "/");
-
+	}
+	
+	@RequestMapping("/accessDenied")
+	public String accessDenied() {
+		System.out.println("get accessDenied page");
+		return "accessDenied";
 	}
 }

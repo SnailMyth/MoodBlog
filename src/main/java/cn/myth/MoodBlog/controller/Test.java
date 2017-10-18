@@ -27,13 +27,12 @@ public class Test {
 
 	@RequestMapping("/test")
 	public String test() {
-		System.out.println("get test page");
 		return "test";
 	}
 	
-	@RequestMapping("/accessDenied")
-	public String accessDenied() {
-		System.out.println("get accessDenied page");
-		return "accessDenied";
+	@RequestMapping("/timeline")
+	public String timeline() {
+		return "timeline";
 	}
+	
 }

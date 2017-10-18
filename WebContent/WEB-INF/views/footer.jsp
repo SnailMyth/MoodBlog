@@ -1,36 +1,8 @@
-<footer>
-	<div class="b-footer-primary">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4 col-xs-12 f-copyright b-copyright">
-					Copyright &copy; 2017.Company name All rights reserved.<a
-						target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
-				</div>
-				<div class="col-sm-8 col-xs-12">
-					<div
-						class="b-btn f-btn b-btn-default b-right b-footer__btn_up f-footer__btn_up j-footer__btn_up">
-						<i class="fa fa-chevron-up"></i>
-					</div>
-					<nav class="b-bottom-nav f-bottom-nav b-right hidden-xs">
-						<ul>
-							<li><a href="#">Homepage</a></li>
-							<li class="is-active-bottom-nav"><a href="#">Headers</a></li>
-							<li><a href="#">Portfolio</a></li>
-							<li><a href="#">Blog</a></li>
-							<li><a href="#">Pages</a></li>
-							<li><a href="#">Shortcode</a></li>
-							<li><a href="#">Shop</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</div>
+<footer style="width: 960px;border-top-width: 0px;">
 	<div class="container">
 		<div class="b-footer-secondary row">
 			<div
 				class="col-md-3 col-sm-12 col-xs-12 f-center b-footer-logo-containter">
-
 				<div class="b-footer-logo-text f-footer-logo-text">
 					<p>Mauris rhoncus pretium porttitor. Cras scelerisque commodo
 						odio.</p>

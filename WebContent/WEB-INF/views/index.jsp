@@ -9,10 +9,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Insert title here</title>
-
 <c:import url="head.jsp"></c:import>
 <script type="text/javascript">
-	
 </script>
 </head>
 <body>

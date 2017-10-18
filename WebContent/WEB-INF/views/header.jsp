@@ -16,7 +16,7 @@
 							class="b-ico-dropdown"><i class="fa fa-arrow-circle-down"></i></span></a>
 					</li>
 					<li class="b-top-nav__1level f-top-nav__1level f-primary-b"><a
-						href="#"><i class="fa fa-music b-menu-1level-ico"></i>Music <span
+						href="<%=basePath%>/article"><i class="fa fa-music b-menu-1level-ico"></i>Music <span
 							class="b-ico-dropdown"><i class="fa fa-arrow-circle-down"></i></span></a></li>
 					<li class="b-top-nav__1level f-top-nav__1level f-primary-b"><a
 						href="<%=basePath%>/timeline"><i

@@ -30,6 +30,11 @@ public class Test {
 		return "test";
 	}
 	
+	@RequestMapping("/article")
+	public String article() {
+		return "article";
+	}
+	
 	@RequestMapping("/timeline")
 	public String timeline() {
 		return "timeline";

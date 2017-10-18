@@ -228,7 +228,6 @@
 				<h2 class="timelineMajorMarker">
 					<span>1964</span>
 				</h2>
-
 				<dl class="timelineMinor">
 					<dt id="19640702">
 						<a>民权法案</a>
@@ -250,7 +249,6 @@
 					<!-- /.timelineEvent -->
 				</dl>
 				<!-- /.timelineMinor -->
-
 				<dl class="timelineMinor">
 					<dt id="19641014">
 						<a>诺贝尔和平奖</a>
@@ -264,15 +262,13 @@
 					<!-- /.timelineEvent -->
 				</dl>
 				<!-- /.timelineMinor -->
-
 			</div>
 			<!-- /.timelineMajor -->
 			<br class="clear">
 		</div>
-		<!-- /#timelineContainer -->
-
+		<!--timelineContainer -->
 	</div>
-	<!-- /.container --> <!-- GLOBAL CORE SCRIPTS --> </article>
+	</article>
 	<div>
 		<%@ include file="footer.jsp"%>
 	</div>

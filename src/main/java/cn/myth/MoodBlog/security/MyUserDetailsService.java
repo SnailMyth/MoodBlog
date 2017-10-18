@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import cn.myth.MoodBlog.StringUtils;
 import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.model.UserDetail;
 import cn.myth.MoodBlog.repositories.UserDao;
@@ -18,7 +19,7 @@ public class MyUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = dao.getUserByName(username);
 		UserDetail detail = new UserDetail().initByDB(user);
-		System.out.println(detail);
+		StringUtils.printValue(MyUserDetailsService.class, "User", detail.toString());
 		return detail;
 	}
 

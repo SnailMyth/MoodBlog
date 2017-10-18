@@ -20,7 +20,6 @@ public class Test {
 		ModelAndView mv = new ModelAndView("test");
 		User user = service.getUserById(6);
 		// UserInfo userInfo = service.getUserInfo(user);
-		System.out.println(user);
 		mv.addObject("data", user);
 		return mv;
 	}

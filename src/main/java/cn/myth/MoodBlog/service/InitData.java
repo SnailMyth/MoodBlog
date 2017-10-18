@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import cn.myth.MoodBlog.StringUtils;
 import cn.myth.MoodBlog.data.Resource;
 import cn.myth.MoodBlog.data.Roles;
 import cn.myth.MoodBlog.data.User;
@@ -42,6 +43,6 @@ public class InitData {
     	userDao.save(admin);
     	
     	
-        System.out.println("初始化数据......");
+        StringUtils.printString(InitData.class, "初始化数据......");
     }
 }

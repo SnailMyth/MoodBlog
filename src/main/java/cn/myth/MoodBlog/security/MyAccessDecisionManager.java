@@ -10,6 +10,8 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
+import cn.myth.MoodBlog.StringUtils;
+
 public class MyAccessDecisionManager implements AccessDecisionManager {
 
 	@Override
@@ -23,8 +25,8 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
         while(iterator.hasNext()) {    
             ConfigAttribute configAttribute = iterator.next();    
             //访问所请求资源所需要的权限    
-            String needPermission = configAttribute.getAttribute();    
-            System.out.println("访问 "+object.toString()+" ,需要的权限是：" + needPermission);    
+            String needPermission = configAttribute.getAttribute();
+            StringUtils.printString(MyAccessDecisionManager.class, "访问 :"+object.toString()+" ,需要的权限是：" + needPermission);
             //用户所拥有的权限authentication    
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();  
             for(GrantedAuthority ga : authorities) {    

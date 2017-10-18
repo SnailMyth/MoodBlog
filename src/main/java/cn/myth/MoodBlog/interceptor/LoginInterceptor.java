@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import cn.myth.MoodBlog.StringUtils;
 import cn.myth.MoodBlog.data.User;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
@@ -33,13 +34,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		Cookie[] cookies = request.getCookies();
 		if (null != cookies) {
 			Stream<Cookie> s = Stream.of(cookies);
-			s.forEach(cookie -> System.out.println("name:" + cookie.getName() + "--- value:" + cookie.getValue()));
-			System.out.println("post URL：" + url);
+			s.forEach(cookie -> StringUtils.printValue(LoginInterceptor.class, cookie.getName(), cookie.getValue()));
+			StringUtils.printValue(LoginInterceptor.class,"request url",url);
 		}
-		
+
 		User user = (User) request.getSession().getAttribute("user");
 		if (user == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
+			response.sendRedirect(request.getContextPath() + "/login");
 			return false;
 		}
 		return true;

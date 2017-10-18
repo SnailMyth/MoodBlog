@@ -14,6 +14,8 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
+import cn.myth.MoodBlog.StringUtils;
+
 public class MyFilterInvocationSecurityMetadataSource
 		implements FilterInvocationSecurityMetadataSource, InitializingBean {
 
@@ -48,8 +50,8 @@ public class MyFilterInvocationSecurityMetadataSource
         for (Map.Entry<RequestMatcher, Collection<ConfigAttribute>> entry : requestMap  
                 .entrySet()) {  
             allAttributes.addAll(entry.getValue());  
-        }  
-        System.out.println("总共有这些权限："+allAttributes.toString());  
+        }
+        StringUtils.printValue(MyFilterInvocationSecurityMetadataSource.class, "All Permission", allAttributes.toString());
         return allAttributes;  
 	}
 

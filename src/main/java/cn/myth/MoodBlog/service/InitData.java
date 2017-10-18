@@ -31,11 +31,11 @@ public class InitData {
     	rolesDao.save(role1);
     	rolesDao.save(role2);
     	
-    	Resource res1 = new Resource(1,"index", "URL", "/index", "主页",role1);
-    	Resource res2 = new Resource(2,"index", "URL", "/index", "主页",role2);
-    	Resource res3 = new Resource(3,"admin", "URL", "/admin", "后台界面入口",role1);
+    	Resource res1= new Resource(1,"index", "URL", "/index", "主页",role2);
+    	Resource res2= new Resource(2,"admin", "URL", "/admin", "后台界面入口",role1);
+    	Resource res3= new Resource(3,"admin", "URL", "/index", "后台界面入口",role1);
     	rescDao.save(res1);
-    	rescDao.save(res2);
+    	rescDao.save(res2);	
     	rescDao.save(res3);	
 
     	User admin = new User(1,"admin","111",true,role1);

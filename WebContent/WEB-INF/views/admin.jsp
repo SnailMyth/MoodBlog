@@ -17,7 +17,8 @@
 </style>
 </head>
 <body>
-	
-	Admin Page!!<br/>
+
+	Admin Page!!
+	<br />
 </body>
 </html>

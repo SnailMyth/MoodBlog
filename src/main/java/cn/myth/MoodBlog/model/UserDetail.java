@@ -37,13 +37,13 @@ public class UserDetail implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if (roles == null || !roles.isEmpty()) {
+		if (roles == null || roles.isEmpty()) {
 			List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 			GrantedAuthority au = new SimpleGrantedAuthority("ROLE_ADMIN");
 			list.add(au);
 			return list;
 		}
-		return null;
+		return roles;
 	}
 
 	@Override

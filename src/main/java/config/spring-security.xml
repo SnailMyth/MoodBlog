@@ -10,60 +10,66 @@
 				http://www.springframework.org/schema/mvc 
 				http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<security:http auto-config="true" use-expressions="true">
-		<security:intercept-url pattern="/login" access="permitAll" />
-		<security:intercept-url pattern="/*"
-			access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/login"
+			access="permitAll" />
+		<security:intercept-url pattern="/admin"
+			access="hasRole('ROLE_ADMIN')" />
 
 		<security:form-login login-page="/login"
-			default-target-url="/index" 
-			login-processing-url="/j_spring_security_check"
+			default-target-url="/index" login-processing-url="/j_spring_security_check"
 			authentication-failure-url="/accessDenied" />
 		<security:logout invalidate-session="true"
 			logout-success-url="/" logout-url="/logout" />
 		<!-- 自定义过滤器 -->
-		<security:custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" /> 
+		<security:custom-filter ref="filterSecurityInterceptor"
+			before="FILTER_SECURITY_INTERCEPTOR" />
+		<security:logout logout-url="/logout"
+			invalidate-session="true" />
 		<security:csrf disabled="true" />
 	</security:http>
-	
-	
+
+
 	<!-- 认证管理器 -->
 	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider user-service-ref="myUserDetailsService" />
-		
-			<!-- <security:jdbc-user-service
-				data-source-ref="dataSource" id="usersService"
-				users-by-username-query="select username,passwd as password,active as enabled from user where username = ?"
-				authorities-by-username-query="select user.username,role.name from user,role,user_role where user.id=user_role.user_id and user_role.role_id=role.id and user.username=?" /> -->
-		
+		<security:authentication-provider
+			user-service-ref="myUserDetailsService" />
+
+		<!-- <security:jdbc-user-service data-source-ref="dataSource" id="usersService" 
+			users-by-username-query="select username,passwd as password,active as enabled 
+			from user where username = ?" authorities-by-username-query="select user.username,role.name 
+			from user,role,user_role where user.id=user_role.user_id and user_role.role_id=role.id 
+			and user.username=?" /> -->
+
 	</security:authentication-manager>
 	<bean id="myUserDetailsService" class="cn.myth.MoodBlog.security.MyUserDetailsService" />
-	
-	
-	
-    <!-- 认证过滤器 -->  
-    <bean id="filterSecurityInterceptor"  
-        class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">  
-        <!-- 用户拥有的权限 -->  
-        <property name="accessDecisionManager" ref="accessDecisionManager" />  
-        <!-- 处理来自于框架其他部分的认证请求-->  
-        <property name="authenticationManager" ref="authenticationManager" />  
-        <!-- 资源与权限对应关系 -->  
-        <property name="securityMetadataSource" ref="securityMetadataSource" />  
-    </bean>
-    
-    <!-- 授权管理器 -->  
-    <bean class="cn.myth.MoodBlog.security.MyAccessDecisionManager" id="accessDecisionManager" />
-    
-        <!--自定义的切入点-->  
-    <bean id="securityMetadataSource"  
-        class="cn.myth.MoodBlog.security.MyFilterInvocationSecurityMetadataSource">  
-        <property name="builder" ref="builder"></property>  
-    </bean> 
-    
-    
-    <bean id="builder" class="cn.myth.MoodBlog.security.JdbcRequestMapBulider">   
-        <property name="dataSource" ref="dataSource" />   
-        <property name="resourceQuery"  
-        value="SELECT resc.res_string,role.`name` FROM resc INNER JOIN role ON resc.role_id = role.id" />
-    </bean>
+
+
+
+	<!-- 认证过滤器 -->
+	<bean id="filterSecurityInterceptor"
+		class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+		<!-- 用户拥有的权限 -->
+		<property name="accessDecisionManager" ref="accessDecisionManager" />
+		<!-- 处理来自于框架其他部分的认证请求 -->
+		<property name="authenticationManager" ref="authenticationManager" />
+		<!-- 资源与权限对应关系 -->
+		<property name="securityMetadataSource" ref="securityMetadataSource" />
+	</bean>
+
+	<!-- 授权管理器 -->
+	<bean class="cn.myth.MoodBlog.security.MyAccessDecisionManager"
+		id="accessDecisionManager" />
+
+	<!--自定义的切入点 -->
+	<bean id="securityMetadataSource"
+		class="cn.myth.MoodBlog.security.MyFilterInvocationSecurityMetadataSource">
+		<property name="builder" ref="builder"></property>
+	</bean>
+
+
+	<bean id="builder" class="cn.myth.MoodBlog.security.JdbcRequestMapBulider">
+		<property name="dataSource" ref="dataSource" />
+		<property name="resourceQuery"
+			value="SELECT resc.res_string,role.`name` FROM resc INNER JOIN role ON resc.role_id = role.id" />
+	</bean>
 </beans>

@@ -1,9 +1,14 @@
 package cn.myth.MoodBlog.data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -25,16 +30,30 @@ public class Resource {
 	@Column(name = "des")
 	private String des;
 
+	@ElementCollection
+	@ManyToOne(targetEntity = Roles.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "role_id")
+	private Roles roles;
+
+	public Roles getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Roles roles) {
+		this.roles = roles;
+	}
+
 	public Resource() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Resource(int id, String name, String type, String resString, String des) {
+	public Resource(int id, String name, String type, String resString, String des, Roles role) {
 		this.name = name;
 		this.id = id;
 		this.type = type;
 		this.resString = resString;
 		this.des = des;
+		this.roles = role;
 	}
 
 	public int getId() {

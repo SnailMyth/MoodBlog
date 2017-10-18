@@ -64,6 +64,6 @@
     <bean id="builder" class="cn.myth.MoodBlog.security.JdbcRequestMapBulider">   
         <property name="dataSource" ref="dataSource" />   
         <property name="resourceQuery"  
-        value="SELECT resc.res_string,role.`name` FROM role INNER JOIN resc ON role.res_id = resc.id" />
+        value="SELECT resc.res_string,role.`name` FROM resc INNER JOIN role ON resc.role_id = role.id" />
     </bean>
 </beans>

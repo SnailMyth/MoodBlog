@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +23,7 @@ import cn.myth.MoodBlog.base.ApiModel;
 import cn.myth.MoodBlog.base.BaseException;
 import cn.myth.MoodBlog.base.Errors;
 import cn.myth.MoodBlog.base.ResultData;
+import cn.myth.MoodBlog.data.Roles;
 import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.service.LoginService;
 
@@ -30,13 +33,18 @@ public class Login {
 	@Autowired
 	public LoginService service;
 
-	@RequestMapping(value= {"/","/login"})
+	@RequestMapping(value = { "/", "/login" })
 	public String main() {
 		return "login";
 	}
-	
+
 	@RequestMapping("/index")
-	public String index() {
+	public String index(HttpServletRequest req) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			User user = service.getUserByName(((UserDetails) principal).getUsername());
+			req.getSession().setAttribute("user", user);
+		}
 		return "index";
 	}
 
@@ -44,11 +52,12 @@ public class Login {
 	public String register() {
 		return "register";
 	}
+
 	@RequestMapping("/admin")
 	public String admin() {
 		return "admin";
 	}
-	
+
 	@RequestMapping("/add")
 	@ResponseBody
 	public ApiModel add(User user, HttpServletRequest req) {
@@ -56,6 +65,7 @@ public class Login {
 		if (user != null) {
 			try {
 				user.active();
+				user.setRoles(new Roles(2, "ROLE_USER", "普通用户权限"));
 				User get = service.addUser(user);
 				req.getSession().setAttribute("user", get);
 				model.setData(get);

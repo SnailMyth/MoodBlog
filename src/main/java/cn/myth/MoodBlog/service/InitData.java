@@ -1,14 +1,18 @@
 package cn.myth.MoodBlog.service;
 
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cn.myth.MoodBlog.StringUtils;
+import cn.myth.MoodBlog.data.Article;
 import cn.myth.MoodBlog.data.Resource;
 import cn.myth.MoodBlog.data.Roles;
 import cn.myth.MoodBlog.data.User;
+import cn.myth.MoodBlog.repositories.ArticleDao;
 import cn.myth.MoodBlog.repositories.RescDao;
 import cn.myth.MoodBlog.repositories.RolesDao;
 import cn.myth.MoodBlog.repositories.UserDao;
@@ -17,6 +21,8 @@ import cn.myth.MoodBlog.repositories.UserDao;
 public class InitData {
 	@Autowired
 	UserDao userDao;
+	@Autowired
+	ArticleDao articleDao;
 	@Autowired
 	RolesDao rolesDao;
 	@Autowired
@@ -41,7 +47,11 @@ public class InitData {
 
     	User admin = new User(1,"admin","111",true,role1);
     	userDao.save(admin);
+    	User user = new User(2,"myth","111",true,role2);
+    	userDao.save(user);
     	
+    	Article article = new Article(user, "合理分配月收入，我和先生从月薪2000起步，一起实现一百万存款", new Date(), "/aaa");
+    	articleDao.save(article);
     	
         StringUtils.printString(InitData.class, "初始化数据......");
     }

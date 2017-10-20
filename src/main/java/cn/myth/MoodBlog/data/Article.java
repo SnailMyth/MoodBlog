@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -25,8 +27,11 @@ public class Article implements Serializable {
 	@GenericGenerator(name = "generator", strategy = "native")
 	@GeneratedValue(generator = "generator")
 	private int id;
-	@Column(name = "author", nullable = false)
-	private int author;
+	
+	@OneToOne
+	@JoinColumn(name = "author")
+	private User author;
+	
 	@Column(name = "title", nullable = false)
 	private String title;
 	@Column(name = "time", nullable = false)
@@ -46,11 +51,11 @@ public class Article implements Serializable {
 		this.id = id;
 	}
 
-	public int getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(int author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 
@@ -86,7 +91,7 @@ public class Article implements Serializable {
 		this.picPath = picPath;
 	}
 
-	public Article(int author, String title, Date time, boolean havePics, @Nullable String picPath, String atlpath) {
+	public Article(User author, String title, Date time, boolean havePics, @Nullable String picPath, String atlpath) {
 		super();
 		this.author = author;
 		this.title = title;
@@ -96,13 +101,13 @@ public class Article implements Serializable {
 		this.atlpath = atlpath;
 	}
 
-	public Article(int author, String title, Date time, String atlpath) {
+	public Article(User author, String title, Date time, String atlpath) {
 		this(author, title, time, false, null, atlpath);
 	}
 
 	public static String getArtPath(Article atl) {
 		StringBuffer atlpat = new StringBuffer();
-		int authorId = atl.getAuthor();
+		int authorId = atl.getAuthor().getId();
 		int artId = atl.getId();
 		int[] numbers = { 10000, 1000, 100, 10, 1 };
 		for (int i = 0; i < Measurement.Million.getNumber(); i++) {

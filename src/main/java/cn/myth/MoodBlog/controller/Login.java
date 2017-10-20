@@ -25,7 +25,6 @@ import cn.myth.MoodBlog.base.ApiModel;
 import cn.myth.MoodBlog.base.BaseException;
 import cn.myth.MoodBlog.base.Errors;
 import cn.myth.MoodBlog.base.ResultData;
-import cn.myth.MoodBlog.data.Roles;
 import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.listener.ContentEvent;
 import cn.myth.MoodBlog.service.LoginService;
@@ -72,8 +71,6 @@ public class Login {
 		ApiModel model = new ApiModel();
 		if (user != null) {
 			try {
-				user.active();
-				user.setRoles(new Roles(2, "ROLE_USER", "普通用户权限"));
 				User get = service.addUser(user);
 				req.getSession().setAttribute("user", get);
 				model.setData(get);

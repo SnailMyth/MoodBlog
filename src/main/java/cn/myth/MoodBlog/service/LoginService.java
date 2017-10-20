@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.myth.MoodBlog.base.BaseException;
 import cn.myth.MoodBlog.base.Errors;
 import cn.myth.MoodBlog.base.ResultData;
+import cn.myth.MoodBlog.data.Roles;
 import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.data.UserInfo;
 import cn.myth.MoodBlog.repositories.UserDao;
@@ -40,6 +41,8 @@ public class LoginService {
 	}
 
 	public User addUser(User user) {
+		user.active();
+		user.setRoles(new Roles(2, "ROLE_USER", "普通用户权限"));
 		User save = dao.save(user);
 		UserInfo info = new UserInfo();
 		info.setId(save.getId());

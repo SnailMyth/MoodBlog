@@ -6,9 +6,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<%
-	String basePath = request.getContextPath();
-%>
 <c:import url="head.jsp"></c:import>
 <style type="text/css">
 .h60 {
@@ -19,7 +16,7 @@
 
 
 function register(){
-	window.location.href="<%=basePath%>/register"; 
+	window.location.href=baseUrl+"/register"; 
 }
 
 
@@ -30,7 +27,7 @@ function login(){
 	
 	$.ajax({
 		type: "POST",
-		url: "<%=basePath%>/login",
+		url: baseUrl+"/login",
 			dataType : "json",
 			data : {
 				j_username : username,
@@ -48,13 +45,12 @@ function login(){
 </script>
 </head>
 <body>
-<!-- window.location.href="<%=basePath%>/index";  -->
 	<div class="container"
 		style="margin-top: 10%; background-image: img/back.jpg">
 		<div class="jumbotron">
-			<h1><%=basePath.substring(1)%></h1>
+			<h1>Welcome Back!</h1>
 			<fieldset style="">
-				<legend>Welcome</legend>
+				<legend>check</legend>
 				<form method="POST" class="bs-example bs-example-form" action="<c:url value='j_spring_security_check'/>"
 					style="margin-left: 20%; width: 500px; height: 200px;">
 					<div class="input-group h60" style="">

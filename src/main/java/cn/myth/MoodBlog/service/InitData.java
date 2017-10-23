@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cn.myth.MoodBlog.StringUtils;
-import cn.myth.MoodBlog.data.Article;
+import cn.myth.MoodBlog.data.Articles;
 import cn.myth.MoodBlog.data.Resource;
 import cn.myth.MoodBlog.data.Roles;
 import cn.myth.MoodBlog.data.User;
@@ -50,7 +50,8 @@ public class InitData {
     	User user = new User(2,"myth","111",true,role2);
     	userDao.save(user);
     	
-    	Article article = new Article(user, "合理分配月收入，我和先生从月薪2000起步，一起实现一百万存款", new Date(), "/aaa");
+    	Articles article = new Articles(user, "合理分配月收入，我和先生从月薪2000起步，一起实现一百万存款", new Date(), "/aaa.txt");
+    	article.setId(1);
     	articleDao.save(article);
     	
         StringUtils.printString(InitData.class, "初始化数据......");

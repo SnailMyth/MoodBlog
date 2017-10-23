@@ -18,5 +18,5 @@
 <script src="js/jquery.fancybox.pack.js"></script>
 <script src="js/jquery.mousewheel-3.0.6.pack.js"></script>
 <!-- End Fancybox -->
-
 <script src="js/cookie.js"></script>
+<script src="js/base.js"></script>

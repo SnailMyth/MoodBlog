@@ -12,35 +12,37 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.util.StringUtils;
 
 import com.sun.istack.internal.Nullable;
 
+import cn.myth.MoodBlog.ReadUtils;
 import cn.myth.MoodBlog.base.Measurement;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "article")
-public class Article implements Serializable {
+public class Articles implements Serializable {
 
 	@Id
 	@Column(name = "id", nullable = false, unique = true)
 	@GenericGenerator(name = "generator", strategy = "native")
 	@GeneratedValue(generator = "generator")
 	private int id;
-	
+
 	@OneToOne
 	@JoinColumn(name = "author")
 	private User author;
-	
+
 	@Column(name = "title", nullable = false)
 	private String title;
 	@Column(name = "time", nullable = false)
 	private Date time;
 	@Column(name = "havePics")
 	private boolean havePics;
-	@Column(name = "picPath")
+	@Column(name = "picPath", unique = true)
 	private String picPath;
-	@Column(name = "atlpath")
+	@Column(name = "atlpath", unique = true)
 	private String atlpath;
 
 	public int getId() {
@@ -91,7 +93,11 @@ public class Article implements Serializable {
 		this.picPath = picPath;
 	}
 
-	public Article(User author, String title, Date time, boolean havePics, @Nullable String picPath, String atlpath) {
+	public Articles() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Articles(User author, String title, Date time, boolean havePics, @Nullable String picPath, String atlpath) {
 		super();
 		this.author = author;
 		this.title = title;
@@ -101,11 +107,11 @@ public class Article implements Serializable {
 		this.atlpath = atlpath;
 	}
 
-	public Article(User author, String title, Date time, String atlpath) {
+	public Articles(User author, String title, Date time, String atlpath) {
 		this(author, title, time, false, null, atlpath);
 	}
 
-	public static String getArtPath(Article atl) {
+	public static String getArtPath(Articles atl) {
 		StringBuffer atlpat = new StringBuffer();
 		int authorId = atl.getAuthor().getId();
 		int artId = atl.getId();
@@ -130,5 +136,16 @@ public class Article implements Serializable {
 			}
 		}
 		return atlpat.toString();
+	}
+
+	public String getContent() {
+		if (!StringUtils.isEmpty(atlpath)) {
+			String content = ReadUtils.readFileByLines(atlpath);
+			content = content
+					.replaceAll("<MoodBlog>image=", "<div align=\"center\" style=\"margin-bottom: 10px;\"><img src=\"download/img?path=")
+					.replaceAll("</MoodBlog>", "\"></div>");
+			return content;
+		}
+		return "";
 	}
 }

@@ -10,8 +10,31 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Insert title here</title>
 <c:import url="head.jsp"></c:import>
+<style type="text/css">
+.content_word {
+	padding-right: 15px;
+}
+
+.title {
+	margin-top: 50px;
+}
+</style>
 <script type="text/javascript">
-	
+
+
+$(window).load(function() {
+	var url=baseUrl+"/get/1";
+	console.log(url);
+	$.getJSON(url, function(json){
+		  console.log(json);
+		  $(".content").html(json.data.content);
+		  $(".title").html("<strong>"+json.data.title+"</strong>");
+		  
+		});
+});
+	//$(document).ready(function() {
+
+	//});
 </script>
 </head>
 <body>
@@ -54,15 +77,11 @@
 					</div>
 					<div class="col-md-9">
 						<!-- 标题 -->
-						<h1 class="content_word title"><%= %>
-						
-						
-						</h1>
+						<h1 class="content_word title">文章标题</h1>
 						<!-- 标题 -->
-						<div class="content_word author">this is fragment of author</div>
+						<div class="content_word author"></div>
 						<!-- 文章内容 -->
-						<div class="content_word content">this is fragment of
-							article</div>
+						<font size="3"><div class="content_word content"></div></font>
 
 						<div class="content_word foot">this is fragment foot of
 							article</div>
@@ -70,6 +89,7 @@
 						<!-- 文章底部作者信息 -->
 						<div class="content_word footer_author">this is author
 							details</div>
+
 
 						<!-- 文章评论列表 -->
 						<div class="comment-list">

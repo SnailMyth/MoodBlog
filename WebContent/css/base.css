@@ -46,3 +46,6 @@ p {
 .content_word{
 	color: black;
 }
+img{
+	max-width: 600px;
+}

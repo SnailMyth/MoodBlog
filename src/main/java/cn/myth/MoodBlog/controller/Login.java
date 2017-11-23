@@ -29,6 +29,11 @@ import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.listener.ContentEvent;
 import cn.myth.MoodBlog.service.LoginService;
 
+/**
+ * 
+ * @author myth_hai
+ * @group Login
+ */
 @Controller
 public class Login {
 
@@ -44,6 +49,13 @@ public class Login {
 		return "login";
 	}
 
+	/**
+	 * 
+	 * @name index
+	 * @description  主页显示
+	 * @method get
+	 * @return text/html
+	 */
 	@RequestMapping("/index")
 	public String index(HttpServletRequest req) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -65,6 +77,16 @@ public class Login {
 		return "admin";
 	}
 
+	/**
+	 * 
+	 * @name add
+	 * @description 添加用户
+ 	 * @url http://localhost/MoodBolg/add
+	 * @method put
+	 * @param username String 用户名 
+	 * @param password String 用户密码
+	 * @return {"message":"注册成功","code":"0"}
+	 */
 	@RequestMapping("/add")
 	@ResponseBody
 	public ApiModel add(User user, HttpServletRequest req) {
@@ -81,6 +103,17 @@ public class Login {
 		return model;
 	}
 
+	/**
+	 * 
+	 * @name   login
+	 * @description  登陆接口
+	 * @url http://www.baidu.com
+	 * @method get
+	 * @param username String 用户名
+	 * @param username String 密码
+	 * @return {"message":"参数错误","nu":"","ischeck":"0","condition":"","com":"","status":"400","state":"0","data":[]}
+	 * @throws IOException
+	 */
 	@RequestMapping("/check")
 	@ResponseBody
 	public ApiModel check(User user, HttpServletRequest req, HttpServletResponse resp) throws IOException {

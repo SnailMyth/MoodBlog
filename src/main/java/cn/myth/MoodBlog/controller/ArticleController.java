@@ -17,6 +17,11 @@ import cn.myth.MoodBlog.base.ApiModel;
 import cn.myth.MoodBlog.model.Article;
 import cn.myth.MoodBlog.service.ArticleService;
 
+/**
+ * 
+ * @author myth_hai
+ * @group  article
+ */
 @Controller
 public class ArticleController {
 
@@ -30,6 +35,15 @@ public class ArticleController {
 		return "article";
 	}
 	
+	/**
+	 * 
+	 * @name  getArticle
+	 * @description  获取文章内容
+	 * @url http://localhost/MoodBolg//article/get/{id}
+	 * @method get
+	 * @param authorId int 作者id
+	 * @return null
+	 */
 	@RequestMapping(value = { "/article/get/{id}"})
 	@ResponseBody
 	public  ApiModel getArticle(@PathVariable(name="id") String authorId) {

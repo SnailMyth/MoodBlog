@@ -1,4 +1,4 @@
-package cn.myth.MoodBlog;
+package cn.myth.MoodBlog.utils;
 
 public class StringUtils {
 	public static void printValue(Class<?> clazz,String name,String value) {

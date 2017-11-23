@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.SmartApplicationListener;
 import org.springframework.stereotype.Component;
 
-import cn.myth.MoodBlog.StringUtils;
+import cn.myth.MoodBlog.utils.StringUtils;
 
 @Component(value = "listener")
 public class LoginListener implements SmartApplicationListener {

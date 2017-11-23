@@ -7,6 +7,8 @@
  */
 package cn.myth.MoodBlog.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,28 +25,24 @@ import cn.myth.MoodBlog.service.ArticleService;
  * @group  article
  */
 @Controller
-public class ArticleController {
+public class MeController {
     
 	@Autowired
 	public ArticleService service;
-
-	@RequestMapping(value = { "/blog"})
-	public String getView() {
-		return "article";
-	}
 	
 	/**
 	 * 
 	 * @description  获取文章内容
 	 * @param authorId  作者id
 	 * @return null
-	 */
-	@RequestMapping(value = { "/blog/get/{id}"})
+	 */	
+	@RequestMapping(value = { "/me/list/{id}"})
 	@ResponseBody
-	public  ApiModel getArticle(@PathVariable(name="id") String articleId) {
+	public ApiModel getList(@PathVariable(name="id") String authorId) {
 		ApiModel model = new ApiModel();
-		Article article = service.get(articleId);
-		model.setData(article);
+		List<Article> list = service.list(authorId);
+		
+		model.setData(list);
 		return model;
 	}
 }

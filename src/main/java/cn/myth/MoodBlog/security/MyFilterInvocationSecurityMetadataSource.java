@@ -14,7 +14,7 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
-import cn.myth.MoodBlog.StringUtils;
+import cn.myth.MoodBlog.utils.StringUtils;
 
 public class MyFilterInvocationSecurityMetadataSource
 		implements FilterInvocationSecurityMetadataSource, InitializingBean {

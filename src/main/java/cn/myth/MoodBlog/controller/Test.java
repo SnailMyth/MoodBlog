@@ -29,9 +29,6 @@ public class Test {
 		return "test";
 	}
 	
-	@RequestMapping("/timeline")
-	public String timeline() {
-		return "timeline";
-	}
+
 	
 }

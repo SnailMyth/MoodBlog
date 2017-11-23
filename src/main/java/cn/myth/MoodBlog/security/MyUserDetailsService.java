@@ -5,10 +5,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import cn.myth.MoodBlog.StringUtils;
 import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.model.UserDetail;
 import cn.myth.MoodBlog.repositories.UserDao;
+import cn.myth.MoodBlog.utils.StringUtils;
 
 public class MyUserDetailsService implements UserDetailsService {
 

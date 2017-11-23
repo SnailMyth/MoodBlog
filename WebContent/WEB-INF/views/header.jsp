@@ -16,10 +16,10 @@
 							class="b-ico-dropdown"><i class="fa fa-arrow-circle-down"></i></span></a>
 					</li>
 					<li class="b-top-nav__1level f-top-nav__1level f-primary-b"><a
-						href="<%=basePath%>/article"><i class="fa fa-music b-menu-1level-ico"></i>Music <span
+						href="#"><i class="fa fa-music b-menu-1level-ico"></i>Music <span
 							class="b-ico-dropdown"><i class="fa fa-arrow-circle-down"></i></span></a></li>
 					<li class="b-top-nav__1level f-top-nav__1level f-primary-b"><a
-						href="<%=basePath%>/timeline"><i
+						href="<%=basePath%>/blog"><i
 							class="fa fa-code b-menu-1level-ico"></i>Blog <span
 							class="b-ico-dropdown"><i class="fa fa-arrow-circle-down"></i></span></a>
 					</li>
@@ -29,7 +29,7 @@
 							class="b-ico-dropdown"><i class="fa fa-arrow-circle-down"></i></span></a>
 					</li>
 					<li class="b-top-nav__1level f-top-nav__1level f-primary-b"><a
-						href="#"><i class="fa fa-info b-menu-1level-ico"></i>Contact
+						href="<%=basePath%>/me"><i class="fa fa-info b-menu-1level-ico"></i>Contact
 							me<span class="b-ico-dropdown"><i
 								class="fa fa-arrow-circle-down"></i></span></a></li>
 				</ul>

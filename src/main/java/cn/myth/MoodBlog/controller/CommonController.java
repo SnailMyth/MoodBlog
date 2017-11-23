@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cn.myth.MoodBlog.ReadUtils;
+import cn.myth.MoodBlog.utils.ReadUtils;
 /**
  * 
  * @author myth_hai

@@ -16,8 +16,8 @@ import org.springframework.util.StringUtils;
 
 import com.sun.istack.internal.Nullable;
 
-import cn.myth.MoodBlog.ReadUtils;
 import cn.myth.MoodBlog.base.Measurement;
+import cn.myth.MoodBlog.utils.ReadUtils;
 
 @SuppressWarnings("serial")
 @Entity

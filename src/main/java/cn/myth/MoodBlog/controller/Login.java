@@ -20,7 +20,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.myth.MoodBlog.StringUtils;
 import cn.myth.MoodBlog.base.ApiModel;
 import cn.myth.MoodBlog.base.BaseException;
 import cn.myth.MoodBlog.base.Errors;
@@ -28,6 +27,7 @@ import cn.myth.MoodBlog.base.ResultData;
 import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.listener.ContentEvent;
 import cn.myth.MoodBlog.service.LoginService;
+import cn.myth.MoodBlog.utils.StringUtils;
 
 /**
  * 
@@ -144,5 +144,11 @@ public class Login {
 	public String accessDenied() {
 		StringUtils.printString(Login.class, "return accessDenied page");
 		return "accessDenied";
+	}
+	
+	
+	@RequestMapping("/me")
+	public String timeline() {
+		return "me";
 	}
 }

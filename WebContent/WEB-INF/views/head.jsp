@@ -20,3 +20,4 @@
 <!-- End Fancybox -->
 <script src="js/cookie.js"></script>
 <script src="js/base.js"></script>
+<script src="js/moment.js"></script>

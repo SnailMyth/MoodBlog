@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import cn.myth.MoodBlog.StringUtils;
 import cn.myth.MoodBlog.data.Articles;
 import cn.myth.MoodBlog.data.Resource;
 import cn.myth.MoodBlog.data.Roles;
@@ -16,6 +15,7 @@ import cn.myth.MoodBlog.repositories.ArticleDao;
 import cn.myth.MoodBlog.repositories.RescDao;
 import cn.myth.MoodBlog.repositories.RolesDao;
 import cn.myth.MoodBlog.repositories.UserDao;
+import cn.myth.MoodBlog.utils.StringUtils;
 
 @Component
 public class InitData {
@@ -50,9 +50,15 @@ public class InitData {
     	User user = new User(2,"myth","111",true,role2);
     	userDao.save(user);
     	
-    	Articles article = new Articles(user, "合理分配月收入，我和先生从月薪2000起步，一起实现一百万存款", new Date(), "/aaa.txt");
+    	Articles article = new Articles(user, "合理分配月收入，我和先生从月薪2000起步，一起实现一百万存款", new Date(1511424515000L), "/aaa.txt");
+    	Articles article1 = new Articles(user, "test1", new Date(1511424525000L), "/aaa1.txt");
+    	Articles article2 = new Articles(user, "test2", new Date(1511424535000L), "/aaa2.txt");
     	article.setId(1);
+    	article1.setId(2);
+    	article2.setId(3);
     	articleDao.save(article);
+    	articleDao.save(article1);
+    	articleDao.save(article2);
     	
         StringUtils.printString(InitData.class, "初始化数据......");
     }

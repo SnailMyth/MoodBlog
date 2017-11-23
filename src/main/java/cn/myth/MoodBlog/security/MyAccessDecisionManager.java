@@ -10,7 +10,7 @@ import org.springframework.security.authentication.InsufficientAuthenticationExc
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-import cn.myth.MoodBlog.StringUtils;
+import cn.myth.MoodBlog.utils.StringUtils;
 
 public class MyAccessDecisionManager implements AccessDecisionManager {
 

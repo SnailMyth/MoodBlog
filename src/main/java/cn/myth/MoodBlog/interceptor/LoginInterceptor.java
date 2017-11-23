@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import cn.myth.MoodBlog.StringUtils;
 import cn.myth.MoodBlog.data.User;
+import cn.myth.MoodBlog.utils.StringUtils;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 

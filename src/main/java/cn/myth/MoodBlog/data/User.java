@@ -38,6 +38,10 @@ public class User implements Serializable {
 	public User() {
 	}
 	
+	public User(String id) {
+		this.id = Integer.parseInt(id);
+	}
+	
 
 	public User(int id, String username, String passwd, boolean active, Roles roles) {
 		this.id = id;

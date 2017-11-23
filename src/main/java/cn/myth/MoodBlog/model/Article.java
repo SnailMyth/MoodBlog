@@ -13,6 +13,7 @@ public class Article {
 	private Date time;
 	private String picPath;
 	private String content;
+	private String des;
 
 	public int getId() {
 		return id;
@@ -61,13 +62,36 @@ public class Article {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	
 
-	public Article(int authorId, String title, Date time, @Nullable String picPath, String atlpath) {
+	public int getAuthorId() {
+		return authorId;
+	}
+
+	public void setAuthorId(int authorId) {
+		this.authorId = authorId;
+	}
+
+	public String getDes() {
+		return des;
+	}
+
+	public void setDes(String des) {
+		this.des = des;
+	}
+
+	public Article(int authorId, String title, Date time, @Nullable String picPath, String content) {
 		this.authorId = authorId;
 		this.title = title;
 		this.time = time;
 		this.picPath = picPath;
-		this.content = atlpath;
+		this.content = content;
+		if (content.length() <= 30) {
+			this.des =  content.substring(0, 29);
+		}else {
+			this.des = content;
+		}
 	}
 
 	public Article(int authorId, String title, Date time, String atlpath) {

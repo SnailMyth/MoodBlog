@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.AbstractHandlerExceptionResolver;
 
-import cn.myth.MoodBlog.StringUtils;
+import cn.myth.MoodBlog.utils.StringUtils;
 
 @Component
 public class BaseExceptionResolver extends AbstractHandlerExceptionResolver {

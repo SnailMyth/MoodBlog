@@ -1,4 +1,4 @@
-package cn.myth.MoodBlog;
+package cn.myth.MoodBlog.utils;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -123,23 +123,25 @@ public class ReadUtils {
 		StringUtils.printValue(ReadUtils.class, "fileName", fileName);
 		StringBuffer sb = new StringBuffer();
 		File file = new File(fileName);
-		BufferedReader reader = null;
+		InputStreamReader reader = null;
+		BufferedReader bf = null;
 		try {
+			reader = new InputStreamReader(new FileInputStream(file), "UTF-8");
+			bf = new BufferedReader(reader);
 			System.out.println("以行为单位读取文件内容，一次读一整行：");
-			reader = new BufferedReader(new FileReader(file));
+			reader = new FileReader(file);
 			String tempString = null;
 			// 一次读入一行，直到读入null为文件结束
-
-			while ((tempString = reader.readLine()) != null) {
+			while ((tempString = bf.readLine()) != null) {
 				sb.append("<p>").append(tempString).append("<p>");
 			}
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (reader != null) {
+			if (bf != null) {
 				try {
-					reader.close();
+					bf.close();
 				} catch (IOException e1) {
 				}
 			}

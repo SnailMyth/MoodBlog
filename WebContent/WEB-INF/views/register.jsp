@@ -35,8 +35,7 @@
 				if (data.error != null) {
 					alert(data.error_message);
 				}else{
-					window.location.href="<%=basePath%>
-	/";
+					window.location.href=baseUrl+"/";
 				}
 			}
 		});
@@ -44,6 +43,9 @@
 </script>
 </head>
 <body>
+	<div>
+		<%@ include file="header.jsp"%>
+	</div>
 	<div class="container" style="margin-top: 10%; height: 500px;">
 		<div class="jumbotron">
 			<h1><%=basePath.substring(1)%></h1>

@@ -18,25 +18,33 @@
 
 
 <script>
+	function item(month, data) {
+		this.month = month;
+		this.data = data;
+	}
 
-	$(window).load(function() {
-		var url = baseUrl + "/list/2";
-		console.log(url);
-		$.getJSON(url, function(json) {
-			console.log(json.data);
-			for(var i = 0;i < json.data.length;i++){
-				var time = Number(json.data[i].time);
-				var day = moment.unix(time);
-				console.log(day.format("HH:MM"));
+	function translateJson(data) {
+		var i = 0;
+		var txt = "<div id=\"timelineContainer\" class=\"timelineContainer\"><div class=\"timelineToggle\"><p><a class=\"expandAll\">open</a></p></div><br class=\"clear\">";
+		for ( var time in data) {
+			txt = txt + "<div class='timelineMajor'>";
+			txt = txt + "<h2 class='timelineMajorMarker'><span>" +time+"</span></h2>";
+			var artiles = data[time];
+			for (var num in artiles) {
+				txt = txt + "<dl class=\"timelineMinor\"><dt id=\"item"+i+"\"><a>"+artiles[num].title+"</a></dt>";
+				//<dd class="timelineEvent" id="item1EX" style="display: none;"><h3>1955年8月28日</h3><p></p><br class="clear"></dd>
+				txt = txt +"<dd class=\"timelineEvent\" id=\"item"+i+"EX\" style=\"display: none;\">"+artiles[num].des+"</p><br class=\"clear\"></dd></dl>";
+				i ++;
 			}
-			
-		});
-	});
-
-	$(document).ready(function() {
+			txt = txt + "</div>";
+		}
+		txt = txt + "<br class=\"clear\"></div>";
+		
+		$("#content").html(txt);
 		$.timeliner({
-			startOpen : [ '#item1']
+			startOpen : [ '#item0EX' ]
 		});
+		
 		$.timeliner({
 			timelineContainer : '#timelineContainer_2'
 		});
@@ -49,6 +57,21 @@
 			transition : "elastic",
 			speed : 750
 		});
+		
+	}
+
+	$(window).load(function() {
+		var url = baseUrl + "/list/2";
+		$.getJSON(url, function(json) {
+
+			translateJson(json.data);
+
+		});
+	});
+
+	$(document).ready(function() {
+		
+		
 	});
 </script>
 <style>
@@ -70,64 +93,9 @@
 		</div>
 		<h1>线性时间轴</h1>
 		<h2>民权运动1954-1964</h2>
-		<div id="timelineContainer" class="timelineContainer">
-			<div class="timelineToggle">
-				<p>
-					<a class="expandAll">open</a>
-				</p>
-			</div>
-			<br class="clear">
-
-
-			<div class="timelineMajor">
-				<h2 class="timelineMajorMarker">
-					<span>1955</span>
-				</h2>
-				<dl class="timelineMinor">
-					<dt id="19550828">
-						<a>艾莫特·泰尔</a>
-					</dt>
-					<dd class="timelineEvent" id="item1" style="display: none;">
-						<h3>1955年8月28日</h3>
-						<p>十四岁的非裔美国人埃米特被残忍杀害后，据说与白人妇女在访问亲戚在密西西比州。这是第一次，黑人和白人记者报道这次审判的集大成者”之一的第二十世纪最令人震惊的和持久的故事。”白被告，Roy
-							Bryant和J.W.
-							Milam，都被一个白人陪审团仅67分钟；后来他们详细描述为看杂志（付给他们4000美元）他们杀了为止。母亲坚持开放的棺材，和他残缺的身体，强大的图像引起强烈的反应，在全国和世界。</p>
-
-						<br class="clear">
-					</dd>
-					<!-- /.timelineEvent -->
-				</dl>
-				<!-- /.timelineMinor -->
-
-
-				<dl class="timelineMinor">
-					<dt id="19551201">
-						<a>罗萨公园</a>
-					</dt>
-					<dd class="timelineEvent" id="19551201EX" style="display: none;">
-						<h3>December 1, 1955</h3>
-						<p>
-							The arrest of Rosa Parks, a 42-year-old African-American
-							seamstress and civil rights activist who refused to give up her
-							bus seat to a white passenger, sets off a long anticipated bus
-							boycott by residents of Montgomery, Ala. The 13-month protest and
-							ensuing litigation eventually make it to the U.S. Supreme Court,
-							which declares that segregation on public buses is
-							unconstitutional.<sup>4</sup> The Montgomery bus boycott brings
-							the Rev. Dr. Martin Luther King Jr. and his nonviolent approach
-							to social change to the forefront of the civil rights movement.
-						</p>
-
-						<br class="clear">
-					</dd>
-					<!-- /.timelineEvent -->
-				</dl>
-				<!-- /.timelineMinor -->
-			</div>
-			<!-- /.timelineMajor -->
-			<br class="clear">
+		<div id="content">
+			
 		</div>
-		<!--timelineContainer -->
 	</div>
 	</article>
 	<div>

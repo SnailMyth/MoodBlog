@@ -1,5 +1,6 @@
 package cn.myth.MoodBlog.service;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -52,8 +53,8 @@ public class InitService {
 		userDao.save(user);
 
 		Articles article = new Articles(user, "情书，爱的注脚", new Date(1511424515000L), "/aaa.txt");
-		Articles article1 = new Articles(user, "test1", new Date(1511424525000L), "/aaa1.txt");
-		Articles article2 = new Articles(user, "test2", new Date(1511424535000L), "/aaa2.txt");
+		Articles article1 = new Articles(user, "test1", new Date(1474973391190L), "/aaa1.txt");
+		Articles article2 = new Articles(user, "test2", new Date(1498560609894L), "/aaa2.txt");
 		article.setId(1);
 		article1.setId(2);
 		article2.setId(3);
@@ -66,5 +67,11 @@ public class InitService {
 
 	public static String getRoot() {
 		return (ROOT != null) ? ROOT : "";
+	}
+	
+	public static void main(String[] args) {
+		Calendar ca = Calendar.getInstance();
+		ca.set(2017, 5,27);
+		System.out.println(ca.getTime().getTime());
 	}
 }

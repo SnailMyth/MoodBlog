@@ -41,8 +41,8 @@ public class MeController {
 	public ApiModel getList(@PathVariable(name="id") String authorId) {
 		ApiModel model = new ApiModel();
 		List<Article> list = service.list(authorId);
-		
 		model.setData(list);
+		System.out.println(model);
 		return model;
 	}
 }

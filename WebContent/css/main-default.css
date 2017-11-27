@@ -14,11 +14,7 @@ html {
   -webkit-text-size-adjust: 100%;
   /* 2 */ }
 
-body {
-  margin: 0;
-  font-family: "Open Sans", sans-serif;
-  font-size: 13px;
-  line-height: 1.2; }
+
 
 article,
 aside,

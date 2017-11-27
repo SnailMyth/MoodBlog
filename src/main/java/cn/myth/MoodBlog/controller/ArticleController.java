@@ -45,6 +45,7 @@ public class ArticleController {
 		ApiModel model = new ApiModel();
 		Article article = service.get(articleId);
 		model.setData(article);
+		System.out.println(article);
 		return model;
 	}
 }

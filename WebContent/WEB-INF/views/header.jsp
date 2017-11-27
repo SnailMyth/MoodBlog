@@ -25,7 +25,7 @@
 					</li>
 					<li
 						class="b-top-nav__1level f-top-nav__1level f-primary-b b-top-nav-big">
-						<a href="#"><i class="fa fa-gamepad b-menu-1level-ico"></i>Dota<span
+						<a href="<%=basePath%>/write"><i class="fa fa-gamepad b-menu-1level-ico"></i>Dota<span
 							class="b-ico-dropdown"><i class="fa fa-arrow-circle-down"></i></span></a>
 					</li>
 					<li class="b-top-nav__1level f-top-nav__1level f-primary-b"><a

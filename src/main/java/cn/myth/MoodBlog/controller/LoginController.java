@@ -35,7 +35,7 @@ import cn.myth.MoodBlog.utils.StringUtils;
  * @group Login
  */
 @Controller
-public class Login {
+public class LoginController {
 
 	 
     @Autowired  
@@ -142,7 +142,7 @@ public class Login {
 
 	@RequestMapping("/accessDenied")
 	public String accessDenied() {
-		StringUtils.printString(Login.class, "return accessDenied page");
+		StringUtils.printString(LoginController.class, "return accessDenied page");
 		return "accessDenied";
 	}
 	

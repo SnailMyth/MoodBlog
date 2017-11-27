@@ -10,8 +10,6 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Insert title here</title>
 <c:import url="head.jsp"></c:import>
-<script src="ueditor/ueditor.config.js"></script>
-<script src="ueditor/ueditor.all.min.js"></script>
 <style type="text/css">
 .content_word {
 	padding-right: 15px;
@@ -43,8 +41,8 @@
 			<div class="container"
 				style="padding-left: 0px; padding-right: 0px; margin: 10px;">
 				<div class="row">
-					<script id="editor" type="text/plain"
-						style="width:1024px;height:500px;"></script>
+					
+					
 				</div>
 			</div>
 		</div>
@@ -53,7 +51,7 @@
 		<%@ include file="footer.jsp"%>
 	</div>
 	<script type="text/javascript">
-		var ue = UE.getEditor('editor');
+	
 	</script>
 </body>
 </html>

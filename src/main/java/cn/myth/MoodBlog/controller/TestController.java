@@ -11,7 +11,7 @@ import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.service.LoginService;
 
 @Controller
-public class Test {
+public class TestController {
 	@Autowired
 	public LoginService service;
 

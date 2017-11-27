@@ -18,11 +18,21 @@
 .title {
 	margin-top: 50px;
 }
-
-
+button{
+margin-left: 10px;
+margin-top: 10px;
+margin-bottom: 10px;
+}
 </style>
-<script type="text/javascript" src="js/ckeditor.js"></script>
+<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
 
+function show(){
+	var data = CKEDITOR.instances.editor.getData();
+	console.log(data);
+}
+
+</script>
 </head>
 <body>
 	<div>
@@ -43,7 +53,12 @@
 					style="display: inherit; margin-left: 0px; margin-right: 0px">
 					<font size="5px" color="black"><b style="margin-left: 30px;">Editor
 							your mind</b></font>
-					
+					<form>
+						<textarea name="editor" id="editor" rows="10" cols="80">
+                		This is my textarea to be replaced with CKEditor.
+            			</textarea>
+					</form>
+					<button class="btn btn-info" onclick="show()">submit</button>
 				</div>
 			</div>
 		</div>
@@ -52,16 +67,10 @@
 		<%@ include file="footer.jsp"%>
 	</div>
 <script type="text/javascript">
-const command = editor.commands.get( 'undo' );
-
-BootstrapEditor
-.create( $( '#editor' ))
-.then( editor => {
-    window.editor = editor;
-} )
-.catch( err => {
-    console.error( err.stack );
-} );
+	CKEDITOR.replace( 'editor',{
+		language: 'fr',
+	    uiColor: '#9AB8F3'
+	});
 </script>
 
 

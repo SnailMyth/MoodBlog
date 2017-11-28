@@ -31,7 +31,15 @@ function show(){
 	var data = CKEDITOR.instances.editor.getData();
 	console.log(data);
 }
-
+function test(){
+	$.ajax({
+		   type: "GET",
+		   url: baseUrl+"/test",
+		   success: function(msg){
+		     alert( "Data Saved: " + msg );
+		   }
+	});
+}
 </script>
 </head>
 <body>
@@ -51,6 +59,7 @@ function show(){
 				style="padding-left: 0px; padding-right: 0px; margin: 10px;">
 				<div class="row"
 					style="display: inherit; margin-left: 0px; margin-right: 0px">
+					<button class="btn btn-info" onclick="test()">submit</button>
 					<font size="5px" color="black"><b style="margin-left: 30px;">Editor
 							your mind</b></font>
 					<form>
@@ -68,7 +77,6 @@ function show(){
 	</div>
 <script type="text/javascript">
 	CKEDITOR.replace( 'editor',{
-		language: 'fr',
 	    uiColor: '#9AB8F3'
 	});
 </script>

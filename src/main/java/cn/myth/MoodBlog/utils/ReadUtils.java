@@ -13,8 +13,8 @@ import java.io.Reader;
 
 public class ReadUtils {
 	
-	private static String ROOT = "E:/MoodBlogSrc/article";
-	private static String ROOT_IMAGE = "E:/MoodBlogSrc/image/";
+	public static String ROOT = "E:/MoodBlogSrc/article";
+	public static String ROOT_IMAGE = "E:/MoodBlogSrc/image/";
 
 	/**
 	 * 以字节为单位读取文件，常用于读二进制文件，如图片、声音、影像等文件。

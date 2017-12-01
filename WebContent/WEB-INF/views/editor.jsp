@@ -10,6 +10,11 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Insert title here</title>
 <c:import url="head.jsp"></c:import>
+<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+<!-- <link rel="stylesheet" type="text/css" href="css/demo.css" /> -->
+<link rel="stylesheet" type="text/css" href="css/component.css" />
+<script src="js/classie.js"></script>
 <style type="text/css">
 .content_word {
 	padding-right: 15px;
@@ -18,28 +23,25 @@
 .title {
 	margin-top: 50px;
 }
-button{
-margin-left: 10px;
-margin-top: 10px;
-margin-bottom: 10px;
+
+button {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 </style>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
-
-function show(){
-	var data = CKEDITOR.instances.editor.getData();
-	console.log(data);
-}
-function test(){
-	$.ajax({
-		   type: "GET",
-		   url: baseUrl+"/test",
-		   success: function(msg){
-		     alert( "Data Saved: " + msg );
-		   }
-	});
-}
+	function push() {
+		var user = ${sessionScope.user};
+		var title = $('input[name=title]').val().trim();
+		var tag = $('input[name=tag]').val().trim();
+		var data = CKEDITOR.instances.editor.getData();
+		console.log(user);
+		console.log(title);
+		console.log(tag);
+		console.log(data);
+	}
 </script>
 </head>
 <body>
@@ -59,15 +61,25 @@ function test(){
 				style="padding-left: 0px; padding-right: 0px; margin: 10px;">
 				<div class="row"
 					style="display: inherit; margin-left: 0px; margin-right: 0px">
-					<button class="btn btn-info" onclick="test()">submit</button>
-					<font size="5px" color="black"><b style="margin-left: 30px;">Editor
-							your mind</b></font>
 					<form>
+						<section style="height:130px;background:#f9f7f6;max-">
+							<label style="margin-left: 10px;margin-top: 20px;font-size: 15px;color: black;">标题</label>
+							<span class="input input--minoru" style="max-width: 820px;"> 
+								<input class="input__field input__field--minoru" type="text" id="input-1" width="800px" name="title" />
+							</span> 
+							<label style="margin-left: 10px;margin-top: 20px;font-size: 15px;color: black;">标签</label>
+							<span class="input input--minoru" style="max-width: 820px;"> 
+								<input class="input__field input__field--minoru" type="text" id="input-2" width="800px" name="tag" />
+							</span>
+						</section>
 						<textarea name="editor" id="editor" rows="10" cols="80">
                 		This is my textarea to be replaced with CKEditor.
             			</textarea>
 					</form>
-					<button class="btn btn-info" onclick="show()">submit</button>
+					<div style="float: right;">
+						<button style="margin-right: 10px; margin-bottom: 5px;"
+							class="btn btn-info" onclick="push()">submit</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -75,11 +87,47 @@ function test(){
 	<div>
 		<%@ include file="footer.jsp"%>
 	</div>
-<script type="text/javascript">
-	CKEDITOR.replace( 'editor',{
-	    uiColor: '#9AB8F3'
-	});
-</script>
+	<script>
+		(function() {
+			// trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+			if (!String.prototype.trim) {
+				(function() {
+					// Make sure we trim BOM and NBSP
+					var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+					String.prototype.trim = function() {
+						return this.replace(rtrim, '');
+					};
+				})();
+			}
+
+			[].slice.call(document.querySelectorAll('input.input__field'))
+					.forEach(function(inputEl) {
+						// in case the input is already filled..
+						if (inputEl.value.trim() !== '') {
+							classie.add(inputEl.parentNode, 'input--filled');
+						}
+
+						// events:
+						inputEl.addEventListener('focus', onInputFocus);
+						inputEl.addEventListener('blur', onInputBlur);
+					});
+
+			function onInputFocus(ev) {
+				classie.add(ev.target.parentNode, 'input--filled');
+			}
+
+			function onInputBlur(ev) {
+				if (ev.target.value.trim() === '') {
+					classie.remove(ev.target.parentNode, 'input--filled');
+				}
+			}
+		})();
+	</script>
+	<script type="text/javascript">
+		CKEDITOR.replace('editor', {
+			uiColor : '#9AB8F3'
+		});
+	</script>
 
 
 </body>

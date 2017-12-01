@@ -32,7 +32,7 @@ public class EditorController {
         String callback = request.getParameter("CKEditorFuncNum");
         try {
 			PrintWriter writer = response.getWriter();
-			writer.print("<script type=\\\"text/javascript\\\">");
+			writer.print("<script type=\"text/javascript\">");
 			writer.print("window.parent.CKEDITOR.tools.callFunction(" + callback + ",'" + imageContextPath + "','')");
 			writer.print("</script>");
 			writer.flush();

@@ -12,7 +12,7 @@ import cn.myth.MoodBlog.data.Articles;
 import cn.myth.MoodBlog.data.Resource;
 import cn.myth.MoodBlog.data.Roles;
 import cn.myth.MoodBlog.data.User;
-import cn.myth.MoodBlog.repositories.ArticleDao;
+import cn.myth.MoodBlog.repositories.ArticlesDao;
 import cn.myth.MoodBlog.repositories.RescDao;
 import cn.myth.MoodBlog.repositories.RolesDao;
 import cn.myth.MoodBlog.repositories.UserDao;
@@ -23,7 +23,7 @@ public class InitService {
 	@Autowired
 	UserDao userDao;
 	@Autowired
-	ArticleDao articleDao;
+	ArticlesDao articleDao;
 	@Autowired
 	RolesDao rolesDao;
 	@Autowired
@@ -52,9 +52,9 @@ public class InitService {
 		User user = new User(2, "myth", "111", true, role2);
 		userDao.save(user);
 
-		Articles article = new Articles(user, "情书，爱的注脚", new Date(1511424515000L), "/aaa.txt");
-		Articles article1 = new Articles(user, "test1", new Date(1474973391190L), "/aaa1.txt");
-		Articles article2 = new Articles(user, "test2", new Date(1498560609894L), "/aaa2.txt");
+		Articles article = new Articles(user, "情书，爱的注脚", new Date(1511424515000L), "aaa.txt");
+		Articles article1 = new Articles(user, "test1", new Date(1474973391190L), "aaa1.txt");
+		Articles article2 = new Articles(user, "test2", new Date(1498560609894L), "text.txt");
 		article.setId(1);
 		article1.setId(2);
 		article2.setId(3);

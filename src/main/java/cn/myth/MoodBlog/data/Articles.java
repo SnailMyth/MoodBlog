@@ -16,8 +16,8 @@ import org.springframework.util.StringUtils;
 
 import com.sun.istack.internal.Nullable;
 
-import cn.myth.MoodBlog.base.Measurement;
-import cn.myth.MoodBlog.utils.ReadUtils;
+import cn.myth.MoodBlog.model.Article;
+import cn.myth.MoodBlog.utils.FileUtils;
 
 @SuppressWarnings("serial")
 @Entity
@@ -111,41 +111,58 @@ public class Articles implements Serializable {
 		this(author, title, time, false, null, atlpath);
 	}
 
-	public static String getArtPath(Articles atl) {
-		StringBuffer atlpat = new StringBuffer();
-		int authorId = atl.getAuthor().getId();
-		int artId = atl.getId();
-		int[] numbers = { 10000, 1000, 100, 10, 1 };
-		for (int i = 0; i < Measurement.Million.getNumber(); i++) {
-
-			if ((authorId / numbers[i]) > 1) {
-				atlpat.append(authorId);
-				break;
-			} else {
-				atlpat.append("0");
-			}
-		}
-
-		for (int i = 0; i < Measurement.Thousand.getNumber(); i++) {
-
-			if ((artId / numbers[i]) > 1) {
-				atlpat.append(artId);
-				break;
-			} else {
-				atlpat.append("0");
-			}
-		}
-		return atlpat.toString();
-	}
+//	public static String getArtPath(Articles atl) {
+//		StringBuffer atlpat = new StringBuffer();
+//		int authorId = atl.getAuthor().getId();
+//		int artId = atl.getId();
+//		int[] numbers = { 10000, 1000, 100, 10, 1 };
+//		for (int i = 0; i < Measurement.Million.getNumber(); i++) {
+//
+//			if ((authorId / numbers[i]) > 1) {
+//				atlpat.append(authorId);
+//				break;
+//			} else {
+//				atlpat.append("0");
+//			}
+//		}
+//
+//		for (int i = 0; i < Measurement.Thousand.getNumber(); i++) {
+//
+//			if ((artId / numbers[i]) > 1) {
+//				atlpat.append(artId);
+//				break;
+//			} else {
+//				atlpat.append("0");
+//			}
+//		}
+//		return atlpat.toString();
+//	}
 
 	public String getContent() {
 		if (!StringUtils.isEmpty(atlpath)) {
-			String content = ReadUtils.readFileByLines(atlpath);
+			String content = FileUtils.readFileByLines(atlpath);
 			content = content
 					.replaceAll("<MoodBlog>image=", "<div align=\"center\" style=\"margin-bottom: 10px;\"><img src=\"download/img?path=")
 					.replaceAll("</MoodBlog>", "\"></div>");
 			return content;
 		}
 		return "";
+	}
+	
+	
+	public String getAtlpath() {
+		return atlpath;
+	}
+
+	public void setAtlpath(String atlpath) {
+		this.atlpath = atlpath;
+	}
+
+	public static Articles initByModel(Article article){
+		Articles a = new Articles();
+		a.setTime(article.getTime());
+		a.setTitle(article.getTitle());
+		a.setAtlpath(article.getFilePath());
+		return a;
 	}
 }

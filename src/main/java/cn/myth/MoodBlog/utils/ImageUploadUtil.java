@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 public class ImageUploadUtil {
-    // Í¼Æ¬ÀàÐÍ
+    // Í¼Æ¬ï¿½ï¿½ï¿½ï¿½
     private static List<String> fileTypes = new ArrayList<String>();
 
     static {
@@ -43,7 +43,7 @@ public class ImageUploadUtil {
                         }
 						
 						fileName = DateFormat.FORMAT_ROUNDNAME.format(new Date())+suffix;
-						File uploadFile = new File(ReadUtils.ROOT_IMAGE+ fileName);
+						File uploadFile = new File(FileUtils.ROOT_IMAGE+ fileName);
 						try {
 							file.transferTo(uploadFile);
 						} catch (IllegalStateException | IOException e) {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import cn.myth.MoodBlog.utils.ReadUtils;
+import cn.myth.MoodBlog.utils.FileUtils;
 /**
  * 
  * @author myth_hai
@@ -29,7 +29,7 @@ public class CommonController {
 	 */
 	@RequestMapping("/download/img")
 	public void timeline(@RequestParam(value = "path") String fileName, HttpServletResponse response) throws IOException {
-		byte[] data = ReadUtils.readImageFile(fileName);
+		byte[] data = FileUtils.readImageFile(fileName);
 		if (data != null) {
 			response.setContentType("image/png");
 			OutputStream stream = response.getOutputStream();

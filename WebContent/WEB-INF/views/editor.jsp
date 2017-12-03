@@ -33,14 +33,25 @@ button {
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript">
 	function push() {
-		var user = ${sessionScope.user};
 		var title = $('input[name=title]').val().trim();
 		var tag = $('input[name=tag]').val().trim();
+		var id = $('input[name=id]').val().trim();
+		var name = $('input[name=username]').val().trim();
 		var data = CKEDITOR.instances.editor.getData();
-		console.log(user);
-		console.log(title);
-		console.log(tag);
-		console.log(data);
+		$.ajax({
+			type : "POST",
+			url : baseUrl+"/add",
+			data : {
+				id:id,
+				title:title,
+				tag:tag,
+				username:name,
+				content:data
+			},
+			success : function(msg) {
+				console.log(msg);
+			}
+		});
 	}
 </script>
 </head>
@@ -62,16 +73,21 @@ button {
 				<div class="row"
 					style="display: inherit; margin-left: 0px; margin-right: 0px">
 					<form>
-						<section style="height:130px;background:#f9f7f6;max-">
-							<label style="margin-left: 10px;margin-top: 20px;font-size: 15px;color: black;">标题</label>
-							<span class="input input--minoru" style="max-width: 820px;"> 
-								<input class="input__field input__field--minoru" type="text" id="input-1" width="800px" name="title" />
-							</span> 
-							<label style="margin-left: 10px;margin-top: 20px;font-size: 15px;color: black;">标签</label>
-							<span class="input input--minoru" style="max-width: 820px;"> 
-								<input class="input__field input__field--minoru" type="text" id="input-2" width="800px" name="tag" />
-							</span>
-						</section>
+						<input type="text" name="id" value="${sessionScope.user.id}"
+							style="display: none;">
+						<input type="text" name="username" value="${sessionScope.user.username}"
+							style="display: none;">
+						<section style="height:130px;background:#f9f7f6;max-"> <label
+							style="margin-left: 10px; margin-top: 20px; font-size: 15px; color: black;">标题</label>
+						<span class="input input--minoru" style="max-width: 820px;">
+							<input class="input__field input__field--minoru" type="text"
+							id="input-1" width="800px" name="title" />
+						</span> <label
+							style="margin-left: 10px; margin-top: 20px; font-size: 15px; color: black;">标签</label>
+						<span class="input input--minoru" style="max-width: 820px;">
+							<input class="input__field input__field--minoru" type="text"
+							id="input-2" width="800px" name="tag" />
+						</span> </section>
 						<textarea name="editor" id="editor" rows="10" cols="80">
                 		This is my textarea to be replaced with CKEditor.
             			</textarea>

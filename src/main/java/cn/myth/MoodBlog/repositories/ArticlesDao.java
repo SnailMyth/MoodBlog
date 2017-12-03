@@ -12,7 +12,7 @@ import cn.myth.MoodBlog.data.Articles;
 import cn.myth.MoodBlog.data.User;
 
 @Repository
-public interface ArticleDao extends JpaRepository<Articles, Integer>, JpaSpecificationExecutor<Articles> {
+public interface ArticlesDao extends JpaRepository<Articles, Integer>, JpaSpecificationExecutor<Articles> {
 
 	@Query("select a from Articles a where author=:id")
 	public List<Articles> authorList(@Param("id")User id);

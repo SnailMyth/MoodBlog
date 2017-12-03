@@ -37,7 +37,7 @@
 		</div>
 	</div>
 	<div style="float: right; margin-top: 30px; margin-right: 20px;">
-		<label>${sessionScope.user.getUsername()}</label><br /> <a
+		<label>${sessionScope.user.username}</label><br /> <a
 			href="<%=basePath%>/loginout">login out</a>
 	</div>
 	<div style="float: right; margin-top: 30px; margin-right: 5px;">

@@ -2,18 +2,27 @@ package cn.myth.MoodBlog.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.myth.MoodBlog.base.ApiModel;
+import cn.myth.MoodBlog.model.Article;
+import cn.myth.MoodBlog.service.EditorService;
 import cn.myth.MoodBlog.utils.ImageUploadUtil;
 
 @Controller
 public class EditorController {
+
+	@Autowired
+	private EditorService service;
 
 	@RequestMapping(value = { "/editor" })
 	public String writeView() {
@@ -23,14 +32,13 @@ public class EditorController {
 	@RequestMapping(value = { "/editor/upload" })
 	@ResponseBody
 	public void imgupload(HttpServletRequest request, HttpServletResponse response) {
-        String fileName = ImageUploadUtil.upload(request);
-        // 结合ckeditor功能
-        // imageContextPath为图片在服务器地址，如upload/123.jpg,非绝对路径
-        String imageContextPath = "download/img?path="+fileName;
-        response.setContentType("text/html;charset=UTF-8");
-        //解决跨域问题
-        String callback = request.getParameter("CKEditorFuncNum");
-        try {
+		String fileName = ImageUploadUtil.upload(request);
+
+		String imageContextPath = "download/img?path=" + fileName;
+		response.setContentType("text/html;charset=UTF-8");
+
+		String callback = request.getParameter("CKEditorFuncNum");
+		try {
 			PrintWriter writer = response.getWriter();
 			writer.print("<script type=\"text/javascript\">");
 			writer.print("window.parent.CKEDITOR.tools.callFunction(" + callback + ",'" + imageContextPath + "','')");
@@ -40,6 +48,17 @@ public class EditorController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
+
+	@RequestMapping(value = { "/editor/add" })
+	@ResponseBody
+	public ApiModel add(@RequestParam("id") String id, @RequestParam("title") String title,
+			@RequestParam("tag") String tag, @RequestParam("content") String content,@RequestParam("username") String name) {
+		Article art = new Article(Integer.parseInt(id), title, new Date(), content, "");
+		boolean add = service.add(art,name);
+		ApiModel m = new ApiModel();
+		m.setData(add);
+		return m;
+	}
+
 }

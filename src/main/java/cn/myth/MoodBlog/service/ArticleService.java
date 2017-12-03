@@ -10,14 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.myth.MoodBlog.data.Articles;
 import cn.myth.MoodBlog.data.User;
 import cn.myth.MoodBlog.model.Article;
-import cn.myth.MoodBlog.repositories.ArticleDao;
+import cn.myth.MoodBlog.repositories.ArticlesDao;
 
 @Service
 @Transactional
 public class ArticleService {
 
 	@Autowired
-	public ArticleDao dao;
+	public ArticlesDao dao;
 
 	public Article get(String id) {
 		Articles articles = dao.findOne(Integer.parseInt(id));

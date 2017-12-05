@@ -75,8 +75,6 @@ button {
 					<form>
 						<input type="text" name="id" value="${sessionScope.user.id}"
 							style="display: none;">
-						<input type="text" name="username" value="${sessionScope.user.username}"
-							style="display: none;">
 						<section style="height:130px;background:#f9f7f6;max-"> <label
 							style="margin-left: 10px; margin-top: 20px; font-size: 15px; color: black;">标题</label>
 						<span class="input input--minoru" style="max-width: 820px;">

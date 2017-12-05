@@ -24,8 +24,8 @@ public class EditorService {
 	@Autowired
 	public UserDao userDao;
 
-	public boolean add(Article article,String name) {
-		User user = userDao.getUserByName(name);
+	public boolean add(Article article,String id) {
+		User user = userDao.findOne(Integer.parseInt(id));
 		String fileName = user.getUsername() + DateFormat.FORMAT_ROUNDNAME.format(new Date()) +".txt";
 		FileUtils.saveFile(fileName, article.getContent());
 		article.setFilePath(fileName);

@@ -53,9 +53,9 @@ public class EditorController {
 	@RequestMapping(value = { "/editor/add" })
 	@ResponseBody
 	public ApiModel add(@RequestParam("id") String id, @RequestParam("title") String title,
-			@RequestParam("tag") String tag, @RequestParam("content") String content,@RequestParam("username") String name) {
+			@RequestParam("tag") String tag, @RequestParam("content") String content) {
 		Article art = new Article(Integer.parseInt(id), title, new Date(), content, "");
-		boolean add = service.add(art,name);
+		boolean add = service.add(art,id);
 		ApiModel m = new ApiModel();
 		m.setData(add);
 		return m;

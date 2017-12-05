@@ -36,7 +36,6 @@ button {
 		var title = $('input[name=title]').val().trim();
 		var tag = $('input[name=tag]').val().trim();
 		var id = $('input[name=id]').val().trim();
-		var name = $('input[name=username]').val().trim();
 		var data = CKEDITOR.instances.editor.getData();
 		$.ajax({
 			type : "POST",
@@ -45,7 +44,7 @@ button {
 				id:id,
 				title:title,
 				tag:tag,
-				username:name,
+				id:id,
 				content:data
 			},
 			success : function(msg) {

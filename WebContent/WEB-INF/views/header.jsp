@@ -39,6 +39,7 @@
 	<div style="float: right; margin-top: 30px; margin-right: 20px;">
 		<label>${sessionScope.user.username}</label><br /> <a
 			href="<%=basePath%>/loginout">login out</a>
+			<input id="user_id" value="${sessionScope.user.id}" style="display: none">
 	</div>
 	<div style="float: right; margin-top: 30px; margin-right: 5px;">
 		<i class="fa fa-odnoklassniki b-menu-1level-ico"></i>

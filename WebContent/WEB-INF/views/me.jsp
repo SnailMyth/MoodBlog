@@ -61,7 +61,8 @@
 	}
 
 	$(window).load(function() {
-		var url = baseUrl + "/list/2";
+		var id = $("input[id=user_id]").val().trim();
+		var url = baseUrl + "/list/"+id;
 		$.getJSON(url, function(json) {
 
 			translateJson(json.data);

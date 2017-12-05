@@ -95,4 +95,10 @@ public class Resource {
 	public void setDes(String des) {
 		this.des = des;
 	}
+
+	@Override
+	public String toString() {
+		return "Resource [id=" + id + ", name=" + name + ", type=" + type + ", resString=" + resString + ", des=" + des
+				+"]";
+	}
 }

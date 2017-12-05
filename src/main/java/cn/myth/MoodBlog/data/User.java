@@ -11,8 +11,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import cn.myth.MoodBlog.base.Jsons;
-
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "user")
@@ -32,8 +30,6 @@ public class User implements Serializable {
 	@OneToOne
 	@JoinColumn(name = "role_id")
 	private Roles roles;
-	
-
 	
 	public User() {
 	}
@@ -109,7 +105,8 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return Jsons.i.toJson(this);
+		return "User [id=" + id + ", username=" + username + ", passwd=" + passwd + ", active=" + active + ", roles="
+				+ roles + "]";
 	}
 
 	public void active() {

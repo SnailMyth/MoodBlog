@@ -73,4 +73,8 @@ public class Roles implements Serializable {
 		this.des = des;
 	}
 
+	@Override
+	public String toString() {
+		return "Roles [id=" + id + ", name=" + name + ", des=" + des + ", res=" + res + "]";
+	}
 }

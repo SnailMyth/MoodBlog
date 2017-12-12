@@ -10,6 +10,7 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Insert title here</title>
 <c:import url="head.jsp"></c:import>
+<link rel="stylesheet" href="css/calendar.css">
 <style type="text/css">
 .content_word {
 	padding-right: 15px;
@@ -18,6 +19,18 @@
 .title {
 	margin-top: 50px;
 }
+
+#calendar {
+	font: 500 14px 'roboto';
+	color: #333;
+	background-color: #fafafa;
+}
+ul, ol, li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
 </style>
 <script type="text/javascript">
 
@@ -41,7 +54,7 @@ $(window).load(function() {
 	<div>
 		<%@ include file="header.jsp"%>
 	</div>
-	<article>
+	<article style="width:1400px;">
 	<div class="container">
 		<div class="banner">
 			<p data-scroll-reveal="enter top over 2s">我们不停的翻弄着回忆，却再也找不回那时的自己</p>
@@ -54,25 +67,8 @@ $(window).load(function() {
 				style="padding-left: 0px; padding-right: 0px; margin: 10px;">
 				<div class="row">
 					<div class="col-md-3">
-						<div class="b-categories-filter" style="margin: 10px;">
-							<h4
-								class="f-primary-b b-h4-special f-h4-special--gray f-h4-special">blog
-								categories</h4>
-							<ul>
-								<li><a class="f-categories-filter_name" href="#">Web
-										Design</a></li>
-								<li><a class="f-categories-filter_name" href="#">Smart
-										Phone</a></li>
-								<li><a class="f-categories-filter_name" href="#">Latop</a></li>
-								<li><a class="f-categories-filter_name" href="#">Apple
-										Store</a></li>
-								<li><a class="f-categories-filter_name" href="#">Wordpress
-										Theme</a></li>
-								<li><a class="f-categories-filter_name" href="#">Web
-										Design</a></li>
-								<li><a class="f-categories-filter_name" href="#">Sport</a></li>
-								<li><a class="f-categories-filter_name" href="#">Fashion</a></li>
-							</ul>
+						<div id="calendar">
+							<div id="ca" style="margin-top:20px;"></div>
 						</div>
 					</div>
 					<div class="col-md-9">
@@ -105,5 +101,31 @@ $(window).load(function() {
 	<div>
 		<%@ include file="footer.jsp"%>
 	</div>
+	
+	<script src="js/calendar.js"></script> 
+<script>
+    $('#ca').calendar({
+        width: 300,
+        height: 270,
+        data: [
+			{
+			  date: '2015/12/24',
+			  value: 'Christmas Eve'
+			},
+			{
+			  date: '2015/12/25',
+			  value: 'Merry Christmas'
+			},
+			{
+			  date: '2016/01/01',
+			  value: 'Happy New Year'
+			}
+		],
+        onSelected: function (view, date, data) {
+            console.log('view:' + view);
+            console.log('data:' + (data || 'None'));
+        }
+    });
+</script>
 </body>
 </html>

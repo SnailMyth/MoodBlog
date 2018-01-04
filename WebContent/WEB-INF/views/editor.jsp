@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 <!-- <link rel="stylesheet" type="text/css" href="css/demo.css" /> -->
 <link rel="stylesheet" type="text/css" href="css/component.css" />
+<link rel="stylesheet" type="text/css" href="css/mdialog.css">
 <script src="js/classie.js"></script>
 <style type="text/css">
 .content_word {
@@ -31,6 +32,8 @@ button {
 }
 </style>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/mdialog.js"></script>
 <script type="text/javascript">
 	function push() {
 		var title = $('input[name=title]').val().trim();
@@ -47,8 +50,15 @@ button {
 				id:id,
 				content:data
 			},
+			dataType:"json",
 			success : function(msg) {
 				console.log(msg);
+				if (msg.data == true) {
+					new TipBox({type:'success',str:'操作成功',hasBtn:true});
+					location.reload();
+				}else{
+					new TipBox({type:'error',str:'对不起,出错了!',hasBtn:true});
+				}
 			}
 		});
 	}

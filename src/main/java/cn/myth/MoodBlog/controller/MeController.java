@@ -50,7 +50,7 @@ public class MeController {
 			Calendar date = Calendar.getInstance();
 			date.setTime(article.getTime());
 			String year = date.get(Calendar.YEAR)+"";
-			String month = date.get(Calendar.MONTH)+"";
+			String month = date.get(Calendar.MONTH) + 1 +"";
 			String key = year+"/"+month;
 			if (data.containsKey(key)) {
 					data.get(key).add(article);

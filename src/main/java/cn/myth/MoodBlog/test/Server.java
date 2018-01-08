@@ -21,10 +21,8 @@ public class Server {
 			ServerBootstrap b = new ServerBootstrap();
 			b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
 					.childHandler(new ChildChannelHandler())
-					.option(ChannelOption.SO_BACKLOG, 128) // 设置TCP缓冲区
-					.option(ChannelOption.SO_SNDBUF, 32 * 1024) // 设置发送数据缓冲大小
-					.option(ChannelOption.SO_RCVBUF, 32 * 1024) // 设置接受数据缓冲大小
-					.childOption(ChannelOption.SO_KEEPALIVE, true); // 保持连接
+					.option(ChannelOption.TCP_NODELAY, true) // 保持连接
+			.childOption(ChannelOption.SO_KEEPALIVE, true); // 保持连接
 
 			ChannelFuture future = b.bind(port).sync();
 			future.channel().closeFuture().sync();

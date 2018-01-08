@@ -9,7 +9,12 @@ public class TestResponse implements Serializable{
 	private static final long serialVersionUID = -1089556797673521380L;
 	private String id;
 	private String rep;
-	
+	public TestResponse() {
+		
+	}
+	public TestResponse(String i) {
+		this.id = i;
+	}
 	public String getId() {
 		return id;
 	}

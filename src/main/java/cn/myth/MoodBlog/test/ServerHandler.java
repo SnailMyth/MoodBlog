@@ -3,31 +3,43 @@ package cn.myth.MoodBlog.test;
 import java.util.Date;
 
 import cn.myth.MoodBlog.utils.DateFormat;
-import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 
 public class ServerHandler extends ChannelHandlerAdapter {
-	private ByteBuf buf;
-	
+	private int count = 0;
 	@Override
 	public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-		buf = ctx.alloc().buffer(20);
 	}
 	
 	@Override
 	public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-		buf.release();
-		buf = null;
 	}
 	
 	//¶Á²Ù×÷
 	@Override
 	public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-		System.out.println("ServerHandler read start~~~!!!");
-        ByteBuf b = (ByteBuf)msg;
-        buf.writeBytes(b);
-        b.release();
+		count++;
+		TestResponse rep = new TestResponse(String.valueOf(count));
+		if (msg instanceof TestRequest) {
+			System.out.println("server get:" + msg);
+			rep.setRep("get str success!");
+		}else {
+			System.out.println("decode to request fail");
+			rep.setRep("decode fail!");
+		}
+
+		ChannelFuture f = ctx.writeAndFlush(rep);
+		f.addListener(new ChannelFutureListener() {
+			
+			@Override
+			public void operationComplete(ChannelFuture future) throws Exception {
+				System.out.println("server respond back over!");
+			}
+		});
+		
 	}
 	
 	@Override
